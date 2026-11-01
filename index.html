@@ -12,9 +12,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Все Для Дома — Vamzid GRUP</title>
 <style>
-:root{--bg:#fbf8f4;--surface:#fff;--ink:#1d1a17;--mute:#6a625a;--line:#e6ded4;--brand:#ff6a00;--brand-d:#c24e00;--dark:#2b2520;--on-dark:#f6efe6;--ph:#f1e8dd;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2d2722;--surface:#3a332c;--ink:#fbf5ec;--mute:#cfc4b6;--line:#51473d;--ph:#443c33;--brand:#ff7a1a;--brand-d:#ff9a4d}}
-:root[data-theme="dark"]{--bg:#2d2722;--surface:#3a332c;--ink:#fbf5ec;--mute:#cfc4b6;--line:#51473d;--ph:#443c33;--brand:#ff7a1a;--brand-d:#ff9a4d}
+:root{--bg:#fbf8f4;--surface:#fff;--ink:#1d1a17;--mute:#6a625a;--line:#e6ded4;--brand:#ff6a00;--brand-d:#c24e00;--dark:#382c24;--on-dark:#f6efe6;--ph:#f1e8dd;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#3d3027;--surface:#4a3b30;--ink:#fffaf2;--mute:#dccfbf;--line:#66523f;--ph:#54443a;--brand:#ff7a1a;--brand-d:#ff9a4d}}
+:root[data-theme="dark"]{--bg:#3d3027;--surface:#4a3b30;--ink:#fffaf2;--mute:#dccfbf;--line:#66523f;--ph:#54443a;--brand:#ff7a1a;--brand-d:#ff9a4d}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:84px}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;overflow-x:hidden}
 a{color:inherit}.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
@@ -32,7 +32,7 @@ nav{display:flex;gap:2px;margin-left:8px}nav a{padding:8px 12px;border-radius:8p
 .btn{background:var(--brand);color:#1d1a17;padding:12px 22px;border-radius:10px;text-align:center}.btn:hover{background:var(--brand-d);color:#fff}
 .btn.alt{background:transparent;color:inherit;border:2px solid currentColor;padding:10px 20px}
 .menu{display:none;background:none;border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--ink);font:inherit}
-.hero{background:radial-gradient(circle at 85% 20%,#6b3510 0,var(--dark) 60%);color:var(--on-dark);overflow:hidden}
+.hero{background:radial-gradient(circle at 85% 20%,#9a4d12 0,var(--dark) 62%);color:var(--on-dark);overflow:hidden}
 .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-top:56px;padding-bottom:56px}
 h1{font-size:clamp(34px,5.2vw,62px);line-height:1.04;margin:0 0 18px;font-weight:800;letter-spacing:-.02em}
 .hero p{max-width:50ch;color:#d9cdbf;margin:0 0 24px;font-size:18px}.hero .row{display:flex;gap:12px;flex-wrap:wrap}.hero .btn.alt{color:var(--on-dark)}
@@ -79,13 +79,13 @@ footer a{display:block;text-decoration:none;color:#d9cdbf;padding:3px 0}footer a
 @media (max-width:520px){.logo small{display:none}.bar{gap:8px}.cats{grid-template-columns:1fr 1fr;gap:10px}.cat{min-height:130px}.cat b{font-size:15px}.grid{grid-template-columns:1fr 1fr;gap:12px}.card .in{padding:10px 12px 14px}.facts{gap:16px}h1{font-size:34px}.hero p{font-size:16px}.phones a{flex-direction:column;gap:2px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
-.hero{background:linear-gradient(90deg,rgba(30,24,19,.78),rgba(30,24,19,.45)),var(--p1) center/cover}
+.hero{background:linear-gradient(90deg,rgba(44,32,24,.78),rgba(44,32,24,.45)),var(--p1) center/cover}
 .pbg{background:linear-gradient(color-mix(in srgb,var(--bg) 82%,transparent),color-mix(in srgb,var(--bg) 88%,transparent)),var(--img) center/cover}
-.strip{min-height:230px;display:grid;align-items:end;text-align:center;color:#fff;padding:60px 20px 22px;background:linear-gradient(rgba(30,24,19,0) 20%,rgba(30,24,19,.7)),var(--mos) center/auto 100% repeat-x,#2b2520}
+.strip{min-height:230px;display:grid;align-items:end;text-align:center;color:#fff;padding:60px 20px 22px;background:linear-gradient(rgba(44,32,24,0) 20%,rgba(44,32,24,.7)),var(--mos) center/auto 100% repeat-x,#382c24}
 .strip h2{margin:0 0 6px;font-size:clamp(28px,4.4vw,48px)}.strip p{margin:0;color:#eadfd2}
-.band{background:linear-gradient(rgba(30,24,19,.68),rgba(30,24,19,.8)),var(--p3) center/cover}
+.band{background:linear-gradient(rgba(44,32,24,.68),rgba(44,32,24,.8)),var(--p3) center/cover}
 .contact{background:linear-gradient(color-mix(in srgb,var(--surface) 92%,transparent),color-mix(in srgb,var(--surface) 95%,transparent)),var(--p5) center/cover}
-footer{background:linear-gradient(rgba(30,24,19,.72),rgba(30,24,19,.86)),var(--p5) center/cover}
+footer{background:linear-gradient(rgba(44,32,24,.72),rgba(44,32,24,.86)),var(--p5) center/cover}
 
 .mega{position:relative;display:grid;grid-template-columns:300px 1fr;background:var(--surface);border:1px solid var(--line);border-radius:16px;min-height:560px}
 .mega ul{list-style:none;margin:0;padding:10px;grid-column:1}
@@ -180,7 +180,7 @@ body.cp main>*:not(#cpage){display:none}body:not(.cp) #cpage{display:none}
 @media (max-width:860px){.sub .all{margin:6px 0 10px;width:100%}.cpage{padding:18px 0 40px}.chips{gap:6px}.chips a{padding:8px 12px}}
 
 /* --- финальная полировка --- */
-#catalog.pbg{background:radial-gradient(60% 55% at 100% 0%,rgba(255,106,0,.15),transparent 70%),radial-gradient(45% 40% at 0% 100%,rgba(255,106,0,.09),transparent 70%),var(--bg)}
+#catalog.pbg{background:radial-gradient(60% 55% at 100% 0%,rgba(255,106,0,.26),transparent 70%),radial-gradient(45% 40% at 0% 100%,rgba(255,106,0,.16),transparent 70%),var(--bg)}
 #service.pbg{background:linear-gradient(180deg,color-mix(in srgb,var(--brand) 10%,var(--bg)),var(--bg))}
 .contact{background:var(--surface);border-top:4px solid var(--brand);border-bottom:0}
 #video h2,#service h2{margin-bottom:20px}
@@ -199,7 +199,7 @@ footer{padding:26px 0 20px}
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px 40px;align-items:start}.fgrid b{font-size:20px}.fgrid p{margin:2px 0 0;color:#b3a89b}
 .flinks{display:flex;flex-wrap:wrap;gap:4px 20px;justify-content:flex-end}.flinks a{display:inline;padding:3px 0}
 .fcont{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.14);padding-top:14px;font-size:14px;color:#b3a89b;display:flex;flex-wrap:wrap;gap:4px 20px}.fcont a{display:inline;padding:0}
-.strip.slim{min-height:120px;padding:36px 20px 16px;background:linear-gradient(rgba(30,24,19,.15),rgba(30,24,19,.62)),var(--p4) center/cover}.strip.slim h2{font-size:clamp(22px,3vw,32px);margin:0}
+.strip.slim{min-height:120px;padding:36px 20px 16px;background:linear-gradient(rgba(44,32,24,.15),rgba(44,32,24,.62)),var(--p4) center/cover}.strip.slim h2{font-size:clamp(22px,3vw,32px);margin:0}
 @media (max-width:860px){html{scroll-padding-top:124px}.fgrid{grid-template-columns:1fr;gap:12px}.flinks{justify-content:flex-start}.strip.slim{min-height:92px;padding:28px 20px 12px}.callbox summary{max-width:none}#video h2,#service h2{margin-bottom:14px}.contact .shopphoto{aspect-ratio:16/7}}
 @media (max-width:520px){.feat{grid-template-columns:1fr 1fr;gap:16px 14px}.feat b{font-size:16px}.feat p{font-size:14px}}
 
@@ -270,15 +270,6 @@ section{padding:44px 0}.lead{margin-bottom:20px}h2{margin-bottom:8px}
 <div class="reels">
 <div class="phone pheat" data-vid><video class="vid" data-k="heat" muted loop playsinline preload="none" aria-label="Видео: обогреватели"></video><button class="play" aria-label="Смотреть видео"></button><button class="tap" aria-label="Пауза или воспроизведение"></button></div>
 <div class="phone pwheel" data-vid><video class="vid" data-k="wheel" muted loop playsinline preload="none" aria-label="Видео: тачки и садовый инвентарь"></video><button class="play" aria-label="Смотреть видео"></button><button class="tap" aria-label="Пауза или воспроизведение"></button></div>
-</div></div></section>
-
-<section id="service" class="pbg" style="--img:var(--p2)"><div class="wrap">
-<h2>Почему к нам удобно приходить</h2>
-<div class="feat">
-<div><b>Широкий ассортимент</b><p>Всё для ремонта, кухни, освещения и сада в одном месте.</p></div>
-<div><b>Отделы по направлениям</b><p>Сантехника, техника и плитка: у каждого отдела свой телефон.</p></div>
-<div><b>Оплата</b><p>Картой или наличными.</p></div>
-<div><b>Доставка и самовывоз</b><p>Условия уточняйте по телефону.</p></div>
 </div></div></section>
 
 <section id="contacts" class="contact"><div class="wrap cols">
