@@ -201,6 +201,15 @@ body:not(.cpg) #cpage{display:none}
 .pimg img{width:100%;height:100%;object-fit:contain}
 .pin{padding:12px 14px 16px;display:grid;gap:6px;flex:1}
 .pin small{color:var(--mute)}
+.plink{color:inherit;text-decoration:none;display:block}.plink:hover b{color:var(--brand-d)}
+.prod{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;align-items:start}
+.prod-img{aspect-ratio:1/1;background:#fff;border-radius:12px;display:grid;place-items:center;font-size:64px;overflow:hidden}.prod-img img{width:100%;height:100%;object-fit:contain}
+.prod-main h2{margin:0 0 8px}.prod-d{color:var(--mute);margin:0 0 14px}.prod-price{font-size:2rem;font-weight:800;color:var(--brand-d);margin:0 0 16px}
+.prod-main .row{display:flex;flex-wrap:wrap;gap:10px}
+.pinfo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+.pinfo section,.prev{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.pinfo h3,.prev h3{margin:0 0 8px;font-size:1.05rem}.pinfo ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--mute)}.prev{margin-top:16px}
+@media(max-width:700px){.prod{grid-template-columns:1fr;padding:14px;gap:16px}.pinfo{grid-template-columns:1fr}.prod-price{font-size:1.7rem}}
 @media(max-width:600px){.pgrid{grid-template-columns:1fr 1fr;gap:10px}.pin{padding:10px 10px 12px}.pin b{font-size:.9rem;line-height:1.25}.pin small{font-size:.78rem}.pin .btn{padding:9px 6px;font-size:.88rem}}
 .pin .btn{margin-top:auto;padding:10px}
 .cempty{border:2px dashed var(--line);border-radius:16px;padding:28px 20px;text-align:center;background:var(--surface)}
@@ -665,13 +674,28 @@ let nav="";
 if(g){nav='<div class="chips">'+g[1].map((y,kk)=>`<a href="#/c/${i}/${j}/${kk}"${kk===k?' aria-current="page"':""}>${esc(y)}</a>`).join("")+"</div>"}
 else{nav=r[1].map((gg,jj)=>`<div class="cgroup"><h3><a href="#/c/${i}/${jj}">${esc(gg[0])}</a></h3><div class="chips">`+gg[1].map((y,kk)=>`<a href="#/c/${i}/${jj}/${kk}">${esc(y)}</a>`).join("")+"</div></div>").join("")}
 const list=PRODUCTS.filter(p=>p.r===r[0]&&(!g||p.g===g[0])&&(!x||p.x===x));
-const body=list.length?'<div class="pgrid">'+list.map(p=>`<article class="pcard"><div class="pimg">${p.img&&/^(img\/|https:\/\/|data:image\/)/.test(p.img)?`<img src="${esc(p.img)}" alt="${esc(p.n)}" loading="lazy">`:'<span aria-hidden="true">📦</span>'}</div><div class="pin"><b>${esc(p.n)}</b>${p.d?`<small>${esc(p.d)}</small>`:""}${typeof p.p==="number"?`<b class="pprice">${esc(money(p.p))}</b>`:""}<button class="btn" data-add="${PRODUCTS.indexOf(p)}">В корзину</button></div></article>`).join("")+"</div>"
+const body=list.length?'<div class="pgrid">'+list.map(p=>`<article class="pcard"><a class="plink" href="#/p/${PRODUCTS.indexOf(p)}" aria-label="${esc(p.n)}: подробнее"><div class="pimg">${pimg(p)}</div></a><div class="pin"><a class="plink" href="#/p/${PRODUCTS.indexOf(p)}"><b>${esc(p.n)}</b></a>${p.d?`<small>${esc(p.d)}</small>`:""}${typeof p.p==="number"?`<b class="pprice">${esc(money(p.p))}</b>`:""}<button class="btn" data-add="${PRODUCTS.indexOf(p)}">В корзину</button></div></article>`).join("")+"</div>"
 :`<div class="cempty"><p><b>Товары этого раздела скоро появятся на сайте.</b><br>А пока уточните наличие и цену у магазина — ответим быстро.</p><div class="row"><button class="btn" data-tgask="${esc(title)}|${esc(r[0])}">Спросить в Telegram</button><a class="btn alt" href="tel:+37329123914">Позвонить</a></div></div>`;
 $("#cpbody").innerHTML=`<nav class="crumbs" aria-label="Путь">${cr}</nav><h2>${esc(title)}</h2>${nav}${body}<p style="margin-top:22px"><a class="back" href="#catalog">← Вернуться в каталог</a></p>`;
 document.title=title+" — Все Для Дома";const h=$("#cpbody h2");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}}
+function pimg(p){return p.img&&/^(img\/|https:\/\/|data:image\/)/.test(p.img)?`<img src="${esc(p.img)}" alt="${esc(p.n)}" loading="lazy">`:'<span aria-hidden="true">📦</span>'}
+function drawProduct(id){const p=PRODUCTS[id],ri=MENU.findIndex(r=>r[0]===p.r),gi=ri<0?-1:MENU[ri][1].findIndex(g=>g[0]===p.g),xi=gi<0?-1:MENU[ri][1][gi][1].indexOf(p.x);
+let cr='<a href="#catalog">Каталог</a>';if(ri>=0){cr+=`<span aria-hidden="true">›</span><a href="#/c/${ri}">${esc(p.r)}</a>`;if(gi>=0){cr+=`<span aria-hidden="true">›</span><a href="#/c/${ri}/${gi}">${esc(p.g)}</a>`;if(xi>=0)cr+=`<span aria-hidden="true">›</span><a href="#/c/${ri}/${gi}/${xi}">${esc(p.x)}</a>`}}
+const back=xi>=0?`#/c/${ri}/${gi}/${xi}`:"#catalog";
+$("#cpbody").innerHTML=`<nav class="crumbs" aria-label="Путь">${cr}<span aria-hidden="true">›</span><span>${esc(p.n)}</span></nav>
+<article class="prod"><div class="prod-img">${pimg(p)}</div><div class="prod-main"><h2>${esc(p.n)}</h2>${p.d?`<p class="prod-d">${esc(p.d)}</p>`:""}${typeof p.p==="number"?`<p class="prod-price">${esc(money(p.p))}</p>`:'<p class="prod-d">Цену уточняйте у магазина.</p>'}
+<div class="row"><button class="btn" data-add="${id}">В корзину</button><button class="btn alt" data-tgask="${esc(p.n)}|${esc(p.r)}">Спросить в Telegram</button></div></div></article>
+<div class="pinfo"><section><h3>🚚 Получение</h3><ul><li>Самовывоз из магазина: Ломоносова 16, Чадыр-Лунга</li><li>Доставка — выберите при оформлении заказа; стоимость и сроки уточнит магазин по телефону</li></ul></section>
+<section><h3>💳 Оплата</h3><ul><li>Наличными при получении</li><li>Картой при получении</li></ul></section>
+<section><h3>🛡 Гарантия</h3><ul><li>Условия гарантии и возврата уточняйте в магазине: (0291) 2-39-14</li></ul></section></div>
+<section class="prev"><h3>Отзывы</h3><p class="prod-d">Отзывов об этом товаре пока нет. Купили его — расскажите, как он вам.</p><button class="btn alt" data-tgrev="${esc(p.n)}">Написать отзыв</button></section>
+<p style="margin-top:22px"><a class="back" href="${back}">← Назад к товарам</a></p>`;
+document.title=p.n+" — Все Для Дома";const h=$("#cpbody h2");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}}
 $("#cpbody").addEventListener("click",e=>{const a=e.target.closest("[data-add]");if(a){const p=PRODUCTS[+a.dataset.add];if(p)addCart(p.n,p.r,p.p);return}
+const rv=e.target.closest("[data-tgrev]");if(rv){tgSend("Здравствуйте! Хочу оставить отзыв о товаре: "+rv.dataset.tgrev+"\n\nМой отзыв: ");return}
 const q=e.target.closest("[data-tgask]");if(q){const v=q.dataset.tgask.split("|");tgSend("Здравствуйте! Интересует: "+v[0]+" ("+v[1]+")")}});
-function route(){const m=location.hash.match(/^#\/c\/(\d+)(?:\/(\d+))?(?:\/(\d+))?$/);
+function route(){const pm=location.hash.match(/^#\/p\/(\d+)$/);if(pm&&PRODUCTS[+pm[1]]){drawProduct(+pm[1]);document.body.classList.add("cpg");scrollTo({top:0,behavior:"instant"});return}
+const m=location.hash.match(/^#\/c\/(\d+)(?:\/(\d+))?(?:\/(\d+))?$/);
 if(m){const i=+m[1],j=m[2]!=null?+m[2]:null,k=m[3]!=null?+m[3]:null;
 if(MENU[i]&&(j==null||MENU[i][1][j])&&(k==null||MENU[i][1][j][1][k])){drawPage(i,j,k);document.body.classList.add("cpg");scrollTo({top:0,behavior:"instant"});return}}
 const was=document.body.classList.contains("cpg");document.body.classList.remove("cpg");document.title="Все Для Дома — Vamzid GRUP";
