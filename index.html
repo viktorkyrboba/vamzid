@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <script>document.documentElement.className+=" js"</script>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-pfgOMgfVZwm2ODyms34QYW9h8EwicylhV77q5LHK8c0=' 'sha256-WqCXyugx79LNQHB0x0Z6J5lJPvb95Aq1qtE5+20tyr4='; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-pfgOMgfVZwm2ODyms34QYW9h8EwicylhV77q5LHK8c0=' 'sha256-+JMix3YTAo5QxUGmeXb798JitiizXYkZsRyuGzJ1Gy0='; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Все Для Дома (Vamzid GRUP) — товары для дома и ремонта в Ceadîr-Lunga: обогреватели, освещение, электрика, краски, посуда, сад и многое другое.">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HardwareStore", "name": "Все Для Дома", "parentOrganization": {"@type": "Organization", "name": "Vamzid GRUP"}, "description": "Товары для дома и ремонта", "telephone": "+37329123914", "address": {"@type": "PostalAddress", "streetAddress": "Lomonosov 16", "addressLocality": "Ceadîr-Lunga", "addressCountry": "MD"}, "sameAs": ["https://www.instagram.com/vamzid.md/"], "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "17:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "08:00", "closes": "14:00"}]}</script>
@@ -423,6 +423,24 @@ em.mk::after{content:"";position:absolute;left:-.04em;right:-.06em;bottom:-.16em
 @media (max-width:860px){#mega:empty{min-height:560px}}
 @media (min-width:861px){#mega:empty{min-height:700px}}
 #cpbody h2:focus{outline:none}
+/* оформление заказа */
+#cartd{width:min(94vw,520px)}
+.ctotal{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0 4px;font-size:18px}.ctotal b{font-size:22px}
+.cact{display:grid;gap:8px;margin-top:14px}
+.cosum{display:grid;gap:6px;padding:4px 0 6px;border-bottom:1px solid var(--line);font-size:14px}.cosum div{display:flex;justify-content:space-between;gap:12px}.cosum span{color:var(--mute)}
+.co{display:grid;gap:12px;margin-top:12px}.co .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.co label{display:grid;gap:4px;font-size:14px;color:var(--mute)}.co label small{font-weight:400}
+.co input:not([type=radio]):not([type=checkbox]),.co textarea{padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;width:100%}
+.co textarea{resize:vertical}
+.co fieldset{border:1px solid var(--line);border-radius:12px;padding:8px 12px 10px;margin:0;display:grid;gap:2px}.co legend{font-size:14px;color:var(--mute);padding:0 4px}
+.co .opt{display:flex;align-items:center;gap:10px;color:var(--ink);font-size:15px;min-height:40px;cursor:pointer}.co .opt input{width:20px;height:20px;accent-color:var(--brand);flex:none}
+.co .agree{align-items:flex-start;font-size:13px;color:var(--mute);line-height:1.45}.co .agree input{margin-top:1px}
+.co .agree .plink{color:inherit;font-size:inherit}
+.co .err{color:#e5484d;font-weight:600;font-size:14px;margin:0;min-height:0}.co .err:empty{display:none}
+.co .hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
+.co .btn[disabled]{opacity:.6;cursor:progress}
+.pprice{color:var(--brand-d);font-size:17px}
+@media (max-width:420px){.co .two{grid-template-columns:1fr}}
 /* фоновые фото ниже первого экрана грузятся, когда до них почти долистали */
 .js .lzs:not(.lzin){--p1:none;--p2:none;--p3:none;--p4:none;--p5:none;--p6:none;--p7:none;--mos:none}
 .gdots button{position:relative}
@@ -496,9 +514,10 @@ em.mk::after{content:"";position:absolute;left:-.04em;right:-.06em;bottom:-.16em
 <dialog id="calld" aria-labelledby="clt"><button class="x" data-close aria-label="Закрыть">×</button><h2 id="clt">Позвонить</h2><p class="hint" style="margin:0 0 12px">Нажмите на номер — откроется звонок. Если звонок не открылся, скопируйте номер и наберите его.</p><ul class="phones" id="calllist"></ul></dialog>
 <dialog id="cartd" aria-labelledby="ctl"><button class="x" data-close aria-label="Закрыть">×</button><h2 id="ctl">Корзина</h2><div id="cartbody"></div></dialog>
 <dialog id="privd" class="priv" aria-labelledby="pvt"><button class="x" data-close aria-label="Закрыть">×</button><h2 id="pvt">Политика конфиденциальности</h2>
-<p class="hint">Обновлено: 2 ноября 2026. Коротко и честно: какие данные проходят через сайт и где они оказываются.</p>
+<p class="hint">Обновлено: 2 ноября 2026 (добавлено оформление заказа). Коротко и честно: какие данные проходят через сайт и где они оказываются.</p>
 <h3>Кто отвечает за данные</h3><p>«Все Для Дома» (Vamzid GRUP), Lomonosov 16, Ceadîr-Lunga, тел. (0291) 2-39-14.</p>
-<h3>Что сайт хранит у вас</h3><p>Только содержимое корзины — в памяти вашего браузера (localStorage), чтобы корзина не пропадала при обновлении страницы. Имён, телефонов и паролей сайт не хранит. Очистить корзину можно кнопкой в корзине или очисткой данных сайта в браузере.</p>
+<h3>Что сайт хранит у вас</h3><p>Только содержимое корзины — в памяти вашего браузера (localStorage), чтобы корзина не пропадала при обновлении страницы. Имя, телефон и адрес из формы заказа на устройстве не сохраняются. Очистить корзину можно кнопкой в корзине или очисткой данных сайта в браузере.</p>
+<h3>Заказ</h3><p>Чтобы выполнить заказ, мы получаем имя, фамилию, телефон, адрес доставки (если выбрана доставка), способ оплаты, комментарий и список товаров. Данные используются только для связи с вами, подтверждения и доставки заказа. Заказ передаётся магазину в Telegram через защищённый сервер-посредник (Cloudflare), который ничего не сохраняет. Основание — ваше согласие и выполнение заказа по вашей просьбе.</p>
 <h3>Что вы отправляете сами</h3><p>Кнопки «Написать в Telegram» открывают Telegram с готовым текстом. Магазин получит сообщение, только если вы сами нажмёте «Отправить». Дальше переписка хранится в Telegram и обрабатывается магазином, чтобы ответить на ваш вопрос.</p>
 <h3>Сторонние сервисы</h3><p>Сайт размещён на GitHub Pages: как любой хостинг, GitHub технически получает IP-адрес и данные браузера при открытии страницы. Telegram, Instagram и Google Maps открываются только по вашему нажатию и работают по своим правилам. Эти сервисы могут обрабатывать данные за пределами Молдовы.</p>
 <h3>Чего мы не делаем</h3><p>Не ставим cookies, не подключаем аналитику, рекламу и счётчики, не продаём и не передаём данные третьим лицам.</p>
@@ -510,7 +529,7 @@ em.mk::after{content:"";position:absolute;left:-.04em;right:-.06em;bottom:-.16em
 (function(){const els=document.querySelectorAll(".lzs");const on=e=>e.classList.add("lzin");if(!("IntersectionObserver" in window)){els.forEach(on);return}const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){on(x.target);io.unobserve(x.target)}}),{rootMargin:"800px 0px"});els.forEach(e=>io.observe(e))})();
 /* ===== РЕДАКТИРУЕМЫЕ ДАННЫЕ: рубрики -> [группа, [подрубрики]] ===== */
 const MENU=[["Автомобильная тематика",[["Аксессуары",["Авто клипсы","Брызговики","Домкраты","Зарядки и бусты","Камеры заднего вида","Компрессоры","Манометры"]],["Обустройство салона",["Авто FM модуляторы","Автомобильные коврики","Автомобильные чехлы","Видеорегистраторы","Держатели для телефона","Подставки для телефонов","Подушки"]],["Уход за автомобилем",["Автомобильная химия","Герметики и смазки","Зеркала","Тонировка"]],["Музыка и звук",["Авто-колонки","Звуковой сигнал","Клеммы","Кнопки и выключатели","Магнитолы","Предохранители"]],["Свет и фары",["Дворники","Задние фонари","Лампочки","Противотуманки"]]]],["Бытовая химия",[["Уборка дома",["Средства для пола","Средства для стёкол","Чистящие порошки и гели","Средства для сантехники","Губки и салфетки"]],["Стирка",["Стиральные порошки","Кондиционеры для белья","Пятновыводители","Хозяйственное мыло"]],["Мытьё посуды",["Средства для посуды","Таблетки для посудомоечных машин","Губки для посуды"]],["Для дома",["Освежители воздуха","Мешки для мусора","Бумажные полотенца","Туалетная бумага"]],["Защита от насекомых",["От тараканов и муравьёв","От комаров и мух","От моли"]]]],["Инструмент и оборудование",[["Ручной инструмент",["Молотки","Отвёртки","Ключи","Плоскогубцы","Пилы и ножовки","Строительные ножи","Рулетки и уровни"]],["Электроинструмент",["Дрели и шуруповёрты","Болгарки","Перфораторы","Лобзики","Шлифмашины"]],["Расходные материалы",["Свёрла","Отрезные диски","Биты","Наждачная бумага"]],["Малярный инструмент",["Кисти","Валики","Шпатели","Малярная лента"]],["Оборудование",["Стремянки и лестницы","Тачки и тележки","Ящики для инструмента"]]]],["Посуда",[["Для готовки",["Кастрюли","Сковороды","Казаны","Чайники"]],["Сервировка",["Тарелки","Чашки и кружки","Стаканы и бокалы","Столовые приборы"]],["Хранение",["Контейнеры","Банки","Термосы"]],["Кухонные принадлежности",["Ножи","Разделочные доски","Тёрки","Половники и лопатки","Формы для выпечки"]]]],["Садоводство и отдых",[["Сад и огород",["Лопаты и грабли","Садовые тачки","Секаторы","Шланги и поливалки","Садовые перчатки"]],["Отдых на природе",["Бассейны","Батуты","Шезлонги","Мангалы и грили","Садовая мебель"]],["Для детей на улице",["Надувные игрушки","Мячи","Песочницы"]]]],["Техника для дома",[["Отопление",["Обогреватели","Масляные радиаторы","Конвекторы","Тепловентиляторы"]],["Климат",["Вентиляторы","Увлажнители воздуха"]],["Кухонная техника",["Электрочайники","Мультиварки","Блендеры","Микроволновые печи"]],["Уход за домом",["Пылесосы","Утюги","Отпариватели"]]]],["Строительство и ремонт",[["Стройматериалы",["Сухие смеси","Цемент","Гипсокартон","Утеплители"]],["Краски и отделка",["Краски","Грунтовки","Лаки и эмали","Шпаклёвки","Клей"]],["Электрика",["Розетки и выключатели","Кабель и провод","Удлинители","Автоматические выключатели"]],["Лампы и освещение",["Лампочки","Светильники","Люстры","Прожекторы","Светодиодные ленты"]],["Сантехника",["Смесители","Трубы и фитинги","Раковины","Унитазы"]],["Крепёж",["Саморезы","Дюбели","Гвозди","Болты и гайки"]]]],["Напольные и настенные покрытия",[["Обои",["Флизелиновые обои","Виниловые обои","Обои под покраску","Клей для обоев"]],["Плитка",["Керамическая плитка","Плиточный клей","Затирка"]],["Напольные покрытия",["Ламинат","Линолеум","Подложка","Плинтусы","Ковры"]],["Стены и потолок",["Стеновые панели","Потолочная плитка","Молдинги"]]]],["Канцелярия",[["Школа и офис",["Тетради","Блокноты","Бумага для печати","Папки"]],["Письменные принадлежности",["Ручки","Карандаши","Маркеры"]],["Мелочи",["Клей","Ножницы","Скотч","Степлеры"]]]]];
-/* PRODUCTS — товары. Добавляйте строки: {n:"Название",r:"Рубрика",g:"Группа",x:"Подгруппа",img:"img/товар.jpg",d:"короткое описание"} */
+/* PRODUCTS — товары. Добавляйте строки: {n:"Название",r:"Рубрика",g:"Группа",x:"Подгруппа",p:199.9 (цена в леях, необязательно),img:"img/товар.jpg",d:"короткое описание"} */
 const PRODUCTS=[];
 /* ===== ЛОГИКА ===== */
 const $=s=>document.querySelector(s);
@@ -533,30 +552,76 @@ f.hidden=false;f.innerHTML=hits.length?`<b>Найдено: ${hits.length}</b><di
 document.querySelectorAll("form[role=search]").forEach(f=>{const q=f.querySelector("input");f.addEventListener("submit",e=>{e.preventDefault();if(document.body.classList.contains("cpg"))location.hash="#catalog";find(q.value);$("#catalog").scrollIntoView()});q.addEventListener("input",()=>{if(!q.value)find("")})});
 const TG="tandemix_dev";
 function tgSend(text){window.open("https://t.me/"+TG+"?text="+encodeURIComponent(text),"_blank","noopener");const ok=()=>toast("Сообщение скопировано. Если текст не появился в чате Telegram — вставьте его."),no=()=>toast("Открываем Telegram. Если текста в чате нет — напишите вручную.");try{navigator.clipboard.writeText(text).then(ok,no)}catch(e){no()}}
-const cartText=()=>"Здравствуйте! Хочу уточнить наличие и цену:\n"+cart.map((i,k)=>(k+1)+". "+i.n+" — "+i.q+" шт. ("+i.r+")").join("\n");
 $("#cf").addEventListener("submit",e=>{e.preventDefault();const m=$("#cf textarea").value.trim();if(!m)return;tgSend("Здравствуйте!\n"+m);$("#ok").textContent="Открываем Telegram: останется нажать «Отправить»."});
 $("#mb").addEventListener("click",()=>{const o=$("#nav").classList.toggle("open");$("#mb").setAttribute("aria-expanded",o)});
 $("#nav").addEventListener("click",()=>{$("#nav").classList.remove("open");$("#mb").setAttribute("aria-expanded","false")});
-/* ===== КАБИНЕТ И КОРЗИНА (данные хранятся только в браузере покупателя) ===== */
-/* ===== КОРЗИНА (хранится только в браузере; персональные данные не сохраняются) ===== */
+/* ===== КОРЗИНА И ЗАКАЗ =====
+   Корзина хранится только в браузере (localStorage, без персональных данных).
+   Имя, телефон и адрес из формы заказа нигде на устройстве не сохраняются: они уходят только в заказ.
+   ORDER_ENDPOINT — адрес сервера-посредника (tools/telegram-worker.js), который пересылает заказ
+   в Telegram магазина. Пока он пустой, заказ открывается в Telegram с готовым текстом. */
+const ORDER_ENDPOINT="";
 const mem={},st={get(k){try{return localStorage.getItem(k)}catch(e){return mem[k]??null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}},del(k){try{localStorage.removeItem(k)}catch(e){}delete mem[k]}};
 const load=(k,d)=>{try{const v=JSON.parse(st.get(k));return v==null?d:v}catch(e){return d}};
 /* раньше здесь был демо-кабинет: удаляем сохранённые им имена и хеши паролей у прежних посетителей */
 st.del("vdd_users");st.del("vdd_sess");
+const price=v=>typeof v==="number"&&isFinite(v)&&v>=0&&v<1e7?Math.round(v*100)/100:null;
 let cart=load("vdd_cart",[]);if(!Array.isArray(cart))cart=[];
-cart=cart.filter(i=>i&&typeof i.n==="string"&&typeof i.r==="string"&&Number.isInteger(i.q)&&i.q>0).map(i=>({n:i.n.slice(0,120),r:i.r.slice(0,120),q:Math.min(99,i.q)}));
+cart=cart.filter(i=>i&&typeof i.n==="string"&&typeof i.r==="string"&&Number.isInteger(i.q)&&i.q>0).map(i=>({n:i.n.slice(0,120),r:i.r.slice(0,120),q:Math.min(99,i.q),p:price(i.p)}));
 const persist=()=>st.set("vdd_cart",JSON.stringify(cart));
-function toast(m){const t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,2200)}
+const money=v=>v.toLocaleString("ru-RU",{maximumFractionDigits:2})+" лей";
+function totals(){let sum=0,unknown=0;cart.forEach(i=>{if(i.p==null)unknown+=i.q;else sum+=i.p*i.q});return{sum:Math.round(sum*100)/100,unknown}}
+function toast(m){const t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,2600)}
 function head(){const n=cart.reduce((s,i)=>s+i.q,0);$("#cnt").textContent=n;$("#cartb").hidden=!n&&!PRODUCTS.length}
-function addCart(n,r){const it=cart.find(i=>i.n===n&&i.r===r);if(it){it.q=Math.min(99,it.q+1)}else cart.push({n,r,q:1});persist();head();toast("Добавлено в корзину: "+n);const c=$("#cnt");c.classList.remove("bump");void c.offsetWidth;c.classList.add("bump")}
-function drawCart(){const b=$("#cartbody");
+function addCart(n,r,p){p=price(p);const it=cart.find(i=>i.n===n&&i.r===r);if(it){it.q=Math.min(99,it.q+1);it.p=p}else cart.push({n,r,q:1,p});persist();head();toast("Добавлено в корзину: "+n);const c=$("#cnt");c.classList.remove("bump");void c.offsetWidth;c.classList.add("bump")}
+function sumHTML(){const t=totals();return `<div class="ctotal"><span>Итого</span><b>${t.sum?money(t.sum):"—"}</b></div>`+(t.unknown?`<p class="hint">${t.sum?`В сумму не входят товары без цены (${t.unknown} шт.) — их стоимость уточнит магазин.`:"Цены этих товаров уточнит магазин."}</p>`:"")+'<p class="hint">Стоимость доставки магазин сообщит при подтверждении заказа.</p>'}
+function drawCart(){const b=$("#cartbody");$("#ctl").textContent="Корзина";
 if(!cart.length){b.innerHTML='<p class="lead" style="margin:0">Корзина пуста. Откройте раздел каталога и добавьте товар кнопкой «В корзину».</p>';return}
-b.innerHTML=cart.map((i,k)=>`<div class="crow"><div><b>${esc(i.n)}</b><small>${esc(i.r)}</small><button class="rm" data-rm="${k}">Удалить</button></div><div class="qty"><button data-dec="${k}" aria-label="Меньше">−</button><b>${i.q}</b><button data-inc="${k}" aria-label="Больше">+</button></div></div>`).join("")
-+'<p class="hint">Оплата — картой или наличными. Онлайн-оплаты на сайте нет: заявка откроется в Telegram, магазин уточнит наличие и стоимость.</p><div style="display:grid;gap:8px;margin-top:14px"><button class="btn" data-tg>Отправить заявку в Telegram</button><button class="btn line" data-send>Заполнить форму вопроса</button><button class="btn line" data-clear>Очистить корзину</button></div>'}
-$("#cartbody").addEventListener("click",e=>{const d=e.target.dataset;if(d.rm!==undefined)cart.splice(+d.rm,1);else if(d.inc!==undefined)cart[+d.inc].q=Math.min(99,cart[+d.inc].q+1);
+b.innerHTML=cart.map((i,k)=>`<div class="crow"><div><b>${esc(i.n)}</b><small>${i.p!=null?esc(money(i.p))+" × "+i.q:"цена уточняется"}</small><button class="rm" data-rm="${k}">Удалить</button></div><div class="qty"><button data-dec="${k}" aria-label="Меньше">−</button><b>${i.q}</b><button data-inc="${k}" aria-label="Больше">+</button></div></div>`).join("")
++sumHTML()+'<div class="cact"><button class="btn" data-co>Оформить заказ</button><button class="btn line" data-clear>Очистить корзину</button></div>'}
+const PAY={cash:"Наличными при получении",card:"Картой при получении"},GET={delivery:"Доставка",pickup:"Самовывоз из магазина"};
+function drawCheckout(err){const b=$("#cartbody");$("#ctl").textContent="Оформление заказа";
+b.innerHTML=`<div class="cosum">${cart.map(i=>`<div><span>${esc(i.n)} × ${i.q}</span><b>${i.p!=null?esc(money(i.p*i.q)):"—"}</b></div>`).join("")}</div>${sumHTML()}
+<form id="co" class="co" novalidate>
+<div class="two"><label>Имя<input name="first" required maxlength="60" autocomplete="given-name"></label><label>Фамилия<input name="last" required maxlength="60" autocomplete="family-name"></label></div>
+<label>Телефон<input name="phone" type="tel" required maxlength="20" inputmode="tel" autocomplete="tel" placeholder="+373 …"></label>
+<fieldset><legend>Как получить</legend><label class="opt"><input type="radio" name="get" value="delivery" checked> Доставка</label><label class="opt"><input type="radio" name="get" value="pickup"> Самовывоз — Lomonosov 16</label></fieldset>
+<label class="addr">Адрес доставки<input name="addr" maxlength="200" autocomplete="street-address" placeholder="Город, улица, дом, квартира"></label>
+<fieldset><legend>Оплата</legend><label class="opt"><input type="radio" name="pay" value="cash" checked> ${PAY.cash}</label><label class="opt"><input type="radio" name="pay" value="card"> ${PAY.card}</label></fieldset>
+<label>Комментарий <small>(необязательно)</small><textarea name="note" rows="2" maxlength="500"></textarea></label>
+<label class="hp" aria-hidden="true">Не заполняйте<input name="website" tabindex="-1" autocomplete="off"></label>
+<label class="opt agree"><input type="checkbox" name="ok" required> <span>Согласен на обработку имени, телефона и адреса для выполнения заказа (<button type="button" class="plink" data-priv>политика</button>)</span></label>
+<p class="err" id="coerr" role="alert">${esc(err||"")}</p>
+<button class="btn" type="submit">Заказать</button><button class="btn line" type="button" data-back>Назад в корзину</button>
+</form>`;syncGet()}
+function syncGet(){const f=$("#co");if(!f)return;const d=f.get.value==="delivery";f.querySelector(".addr").hidden=!d;f.addr.required=d}
+function orderData(f){const v=n=>(f[n].value||"").trim().replace(/\s+/g," ");return{first:v("first"),last:v("last"),phone:v("phone"),get:f.get.value,addr:f.get.value==="delivery"?v("addr"):"",pay:f.pay.value,note:f.note.value.trim().slice(0,500),website:f.website.value,items:cart.map(i=>({n:i.n,q:i.q,p:i.p})),total:totals().sum}}
+function checkOrder(o){if(o.first.length<2||o.last.length<2)return"Укажите имя и фамилию.";
+if(!/^\+?[0-9][0-9 ()-]{5,18}$/.test(o.phone)||o.phone.replace(/\D/g,"").length<6)return"Проверьте номер телефона.";
+if(o.get==="delivery"&&o.addr.length<5)return"Укажите адрес доставки.";if(!Object.prototype.hasOwnProperty.call(PAY,o.pay)||!Object.prototype.hasOwnProperty.call(GET,o.get))return"Выберите способ получения и оплаты.";return""}
+function orderText(o){return"Новый заказ с сайта\n\n"+o.items.map((i,k)=>(k+1)+". "+i.n+" — "+i.q+" шт."+(i.p!=null?" × "+money(i.p):" (цена не указана)")).join("\n")+"\n\nИтого: "+(o.total?money(o.total)+(o.items.some(i=>i.p==null)?" + товары без цены":""):"уточнить")+"\nПолучение: "+GET[o.get]+(o.addr?"\nАдрес: "+o.addr:"")+"\nОплата: "+PAY[o.pay]+"\n\nИмя: "+o.first+" "+o.last+"\nТелефон: "+o.phone+(o.note?"\nКомментарий: "+o.note:"")}
+function done(html){cart=[];persist();head();$("#ctl").textContent="Спасибо!";$("#cartbody").innerHTML=html}
+let sending=false;
+async function submitOrder(f){if(sending)return;const o=orderData(f),bad=checkOrder(o),er=$("#coerr");
+if(bad){er.textContent=bad;return}if(!f.ok.checked){er.textContent="Нужно согласие на обработку данных для заказа.";return}
+if(o.website){done("<p>Спасибо!</p>");return}
+er.textContent="";
+if(!ORDER_ENDPOINT){tgSend(orderText(o));done('<p class="lead" style="margin:0 0 10px"><b>Почти готово.</b> Открылся Telegram с текстом заказа — нажмите там «Отправить», и магазин получит заказ.</p><p class="hint">Если Telegram не открылся, позвоните: (0291) 2-39-14.</p>');return}
+sending=true;const btn=f.querySelector('[type=submit]');btn.disabled=true;btn.textContent="Отправляем…";
+const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),15000);
+try{const r=await fetch(ORDER_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(o),signal:ac.signal,credentials:"omit",referrerPolicy:"no-referrer"});
+const j=await r.json().catch(()=>({}));if(!r.ok||!j.ok)throw new Error(j.error||"HTTP "+r.status);
+done(`<p class="lead" style="margin:0 0 10px"><b>Заказ ${esc(String(j.id||""))} принят!</b></p><p>Магазин свяжется с вами по телефону ${esc(o.phone)}, чтобы подтвердить наличие, сумму и доставку.</p>`)}
+catch(e){er.innerHTML='Не получилось отправить заказ. Проверьте интернет и попробуйте ещё раз — или <button type="button" class="plink" data-tgorder>отправьте через Telegram</button>.';btn.disabled=false;btn.textContent="Заказать";f._o=o}
+finally{clearTimeout(tm);sending=false}}
+$("#cartbody").addEventListener("change",e=>{if(e.target.name==="get")syncGet()});
+$("#cartbody").addEventListener("submit",e=>{if(e.target.id==="co"){e.preventDefault();submitOrder(e.target)}});
+$("#cartbody").addEventListener("click",e=>{const d=e.target.dataset;
+if(d.co!==undefined){drawCheckout();$("#co input").focus();return}
+if(d.back!==undefined){drawCart();return}
+if(d.tgorder!==undefined){const f=$("#co");if(f&&f._o){tgSend(orderText(f._o));done('<p class="lead">Открылся Telegram с текстом заказа — нажмите там «Отправить».</p>')}return}
+if(d.rm!==undefined)cart.splice(+d.rm,1);else if(d.inc!==undefined)cart[+d.inc].q=Math.min(99,cart[+d.inc].q+1);
 else if(d.dec!==undefined){const i=cart[+d.dec];i.q--;if(i.q<1)cart.splice(+d.dec,1)}else if(d.clear!==undefined)cart=[];
-else if(d.tg!==undefined){tgSend(cartText());return}
-else if(d.send!==undefined){$("#cf textarea").value=cartText();$("#cartd").close();$("#cf").scrollIntoView({block:"center"});return}
 else return;persist();head();drawCart()});
 $("#cartb").addEventListener("click",()=>{drawCart();$("#cartd").showModal()});
 
@@ -580,11 +645,11 @@ let nav="";
 if(g){nav='<div class="chips">'+g[1].map((y,kk)=>`<a href="#/c/${i}/${j}/${kk}"${kk===k?' aria-current="page"':""}>${esc(y)}</a>`).join("")+"</div>"}
 else{nav=r[1].map((gg,jj)=>`<div class="cgroup"><h3><a href="#/c/${i}/${jj}">${esc(gg[0])}</a></h3><div class="chips">`+gg[1].map((y,kk)=>`<a href="#/c/${i}/${jj}/${kk}">${esc(y)}</a>`).join("")+"</div></div>").join("")}
 const list=PRODUCTS.filter(p=>p.r===r[0]&&(!g||p.g===g[0])&&(!x||p.x===x));
-const body=list.length?'<div class="pgrid">'+list.map(p=>`<article class="pcard"><div class="pimg">${p.img&&/^(img\/|https:\/\/|data:image\/)/.test(p.img)?`<img src="${esc(p.img)}" alt="${esc(p.n)}" loading="lazy">`:'<span aria-hidden="true">📦</span>'}</div><div class="pin"><b>${esc(p.n)}</b>${p.d?`<small>${esc(p.d)}</small>`:""}<button class="btn" data-add="${PRODUCTS.indexOf(p)}">В корзину</button></div></article>`).join("")+"</div>"
+const body=list.length?'<div class="pgrid">'+list.map(p=>`<article class="pcard"><div class="pimg">${p.img&&/^(img\/|https:\/\/|data:image\/)/.test(p.img)?`<img src="${esc(p.img)}" alt="${esc(p.n)}" loading="lazy">`:'<span aria-hidden="true">📦</span>'}</div><div class="pin"><b>${esc(p.n)}</b>${p.d?`<small>${esc(p.d)}</small>`:""}${typeof p.p==="number"?`<b class="pprice">${esc(money(p.p))}</b>`:""}<button class="btn" data-add="${PRODUCTS.indexOf(p)}">В корзину</button></div></article>`).join("")+"</div>"
 :`<div class="cempty"><p><b>Товары этого раздела скоро появятся на сайте.</b><br>А пока уточните наличие и цену у магазина — ответим быстро.</p><div class="row"><button class="btn" data-tgask="${esc(title)}|${esc(r[0])}">Спросить в Telegram</button><a class="btn alt" href="tel:+37329123914">Позвонить</a></div></div>`;
 $("#cpbody").innerHTML=`<nav class="crumbs" aria-label="Путь">${cr}</nav><h2>${esc(title)}</h2>${nav}${body}<p style="margin-top:22px"><a class="back" href="#catalog">← Вернуться в каталог</a></p>`;
 document.title=title+" — Все Для Дома";const h=$("#cpbody h2");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}}
-$("#cpbody").addEventListener("click",e=>{const a=e.target.closest("[data-add]");if(a){const p=PRODUCTS[+a.dataset.add];if(p)addCart(p.n,p.r);return}
+$("#cpbody").addEventListener("click",e=>{const a=e.target.closest("[data-add]");if(a){const p=PRODUCTS[+a.dataset.add];if(p)addCart(p.n,p.r,p.p);return}
 const q=e.target.closest("[data-tgask]");if(q){const v=q.dataset.tgask.split("|");tgSend("Здравствуйте! Интересует: "+v[0]+" ("+v[1]+")")}});
 function route(){const m=location.hash.match(/^#\/c\/(\d+)(?:\/(\d+))?(?:\/(\d+))?$/);
 if(m){const i=+m[1],j=m[2]!=null?+m[2]:null,k=m[3]!=null?+m[3]:null;

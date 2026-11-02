@@ -9,10 +9,21 @@ import base64, hashlib, re, sys, pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = (ROOT / "src/index.html").read_text(encoding="utf-8")
 
+def order_origin():
+    """Адрес сервера заказов из const ORDER_ENDPOINT — разрешаем подключение только к нему."""
+    m = re.search(r'const ORDER_ENDPOINT="([^"]*)"', SRC)
+    url = m.group(1) if m else ""
+    if not url:
+        return "'none'"
+    o = re.match(r"(https://[^/]+)", url)
+    if not o:
+        sys.exit("ORDER_ENDPOINT должен начинаться с https://")
+    return o.group(1)
+
 def csp(script_src):
     return ("<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; "
             f"script-src {script_src}; style-src 'unsafe-inline'; img-src 'self' data:; "
-            "connect-src 'none'; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; "
+            f"connect-src {order_origin()}; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; "
             "manifest-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'\">")
 
 def inline_hashes(html):
