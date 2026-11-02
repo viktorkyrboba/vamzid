@@ -6,12 +6,16 @@
 - `src/index.html` — исходник: разметка, стили и скрипт в одном читаемом файле. **Править здесь.**
 - `img/` — фоновые фото (JPEG).
 - `tools/build.py` — сборка.
-- `index.html` — собранная страница для GitHub Pages (не править вручную).
+- `dist/` — собранный сайт для Cloudflare Pages, `index.html` — для GitHub Pages (не править вручную).
 - `404.html`, `robots.txt`, `og.jpg` (превью для соцсетей), `_headers` (заголовки безопасности для Cloudflare/Netlify).
+
+## Хостинг
+- Основной: **Cloudflare Pages** — публикует папку `dist/` из этого репозитория после каждого обновления.
+- Запасной: GitHub Pages — `index.html` в корне.
 
 ## Сборка
 ```
-python3 tools/build.py gh                # index.html + строгий CSP по хешам скриптов
+python3 tools/build.py all               # dist/ (Cloudflare) + index.html (GitHub), строгий CSP по хешам скриптов
 python3 tools/build.py single out.html   # один файл со встроенными картинками
 ```
 После любой правки `src/index.html` нужно пересобрать: иначе хеши CSP не совпадут и скрипты не запустятся.

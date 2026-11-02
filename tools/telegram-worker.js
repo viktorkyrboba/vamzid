@@ -9,7 +9,8 @@
  * Переменные (Settings → Variables and Secrets):
  *   BOT_TOKEN       — секрет: токен бота от @BotFather
  *   CHAT_ID         — секрет: ваш chat id (куда присылать заказы)
- *   ALLOWED_ORIGIN  — адрес сайта без слэша в конце, например https://viktorkyrboba.github.io
+ *   ALLOWED_ORIGIN  — адреса сайта без слэша в конце, через запятую, например
+ *                     https://vamzid.pages.dev,https://viktorkyrboba.github.io
  * Необязательно: привязка Rate Limiting с именем RL (ограничение частоты по IP).
  *
  * Персональные данные заказа не сохраняются и не пишутся в логи: Worker только
@@ -79,8 +80,9 @@ function message(o, id) {
 
 export default {
   async fetch(req, env) {
-    const allowed = env.ALLOWED_ORIGIN || "";
+    const list = (env.ALLOWED_ORIGIN || "").split(",").map((s) => s.trim()).filter(Boolean);
     const origin = req.headers.get("Origin") || "";
+    const allowed = list.includes(origin) ? origin : "";
     const cors = {
       "Access-Control-Allow-Origin": allowed,
       "Access-Control-Allow-Methods": "POST",
@@ -88,7 +90,7 @@ export default {
       "Access-Control-Max-Age": "86400",
       Vary: "Origin",
     };
-    if (!allowed || origin !== allowed) return json({ ok: false, error: "forbidden" }, 403, {});
+    if (!allowed) return json({ ok: false, error: "forbidden" }, 403, {});
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
     if (req.method !== "POST") return json({ ok: false, error: "method" }, 405, cors);
     if ((req.headers.get("Content-Type") || "").split(";")[0].trim() !== "application/json")
