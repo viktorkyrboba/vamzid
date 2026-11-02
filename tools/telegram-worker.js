@@ -29,7 +29,7 @@ function json(data, status, cors) {
 
 const str = (v, max) => (typeof v === "string" ? v.trim().replace(/\s+/g, " ").slice(0, max) : "");
 // убираем управляющие символы, чтобы нельзя было «нарисовать» в сообщении поддельные строки
-const clean = (v, max) => str(v, max).replace(/[\u0000-\u001f\u007f‪-‮⁦-⁩]/g, "");
+const clean = (v, max) => str(v, max).replace(/[\u0000-\u001f\u007f\u202a-\u202e\u2066-\u2069]/g, "");
 
 function validate(o) {
   if (!o || typeof o !== "object") return "bad request";
