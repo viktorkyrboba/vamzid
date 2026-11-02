@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <script>document.documentElement.className+=" js"</script>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-pfgOMgfVZwm2ODyms34QYW9h8EwicylhV77q5LHK8c0=' 'sha256-+JMix3YTAo5QxUGmeXb798JitiizXYkZsRyuGzJ1Gy0='; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-pfgOMgfVZwm2ODyms34QYW9h8EwicylhV77q5LHK8c0=' 'sha256-Z10us1gbcXHh2yBv6yR+TnZfcQ+mSs793dBJSuX0Ar0='; style-src 'unsafe-inline'; img-src 'self' data:; connect-src https://vdd-orders.victorcirboba.workers.dev; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Все Для Дома (Vamzid GRUP) — товары для дома и ремонта в Ceadîr-Lunga: обогреватели, освещение, электрика, краски, посуда, сад и многое другое.">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HardwareStore", "name": "Все Для Дома", "parentOrganization": {"@type": "Organization", "name": "Vamzid GRUP"}, "description": "Товары для дома и ремонта", "telephone": "+37329123914", "address": {"@type": "PostalAddress", "streetAddress": "Lomonosov 16", "addressLocality": "Ceadîr-Lunga", "addressCountry": "MD"}, "sameAs": ["https://www.instagram.com/vamzid.md/"], "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "17:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "08:00", "closes": "14:00"}]}</script>
@@ -560,7 +560,7 @@ $("#nav").addEventListener("click",()=>{$("#nav").classList.remove("open");$("#m
    Имя, телефон и адрес из формы заказа нигде на устройстве не сохраняются: они уходят только в заказ.
    ORDER_ENDPOINT — адрес сервера-посредника (tools/telegram-worker.js), который пересылает заказ
    в Telegram магазина. Пока он пустой, заказ открывается в Telegram с готовым текстом. */
-const ORDER_ENDPOINT="";
+const ORDER_ENDPOINT="https://vdd-orders.victorcirboba.workers.dev/";
 const mem={},st={get(k){try{return localStorage.getItem(k)}catch(e){return mem[k]??null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}},del(k){try{localStorage.removeItem(k)}catch(e){}delete mem[k]}};
 const load=(k,d)=>{try{const v=JSON.parse(st.get(k));return v==null?d:v}catch(e){return d}};
 /* раньше здесь был демо-кабинет: удаляем сохранённые им имена и хеши паролей у прежних посетителей */

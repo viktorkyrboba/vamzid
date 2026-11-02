@@ -560,7 +560,7 @@ $("#nav").addEventListener("click",()=>{$("#nav").classList.remove("open");$("#m
    Имя, телефон и адрес из формы заказа нигде на устройстве не сохраняются: они уходят только в заказ.
    ORDER_ENDPOINT — адрес сервера-посредника (tools/telegram-worker.js), который пересылает заказ
    в Telegram магазина. Пока он пустой, заказ открывается в Telegram с готовым текстом. */
-const ORDER_ENDPOINT="";
+const ORDER_ENDPOINT="https://vdd-orders.victorcirboba.workers.dev/";
 const mem={},st={get(k){try{return localStorage.getItem(k)}catch(e){return mem[k]??null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){mem[k]=v}},del(k){try{localStorage.removeItem(k)}catch(e){}delete mem[k]}};
 const load=(k,d)=>{try{const v=JSON.parse(st.get(k));return v==null?d:v}catch(e){return d}};
 /* раньше здесь был демо-кабинет: удаляем сохранённые им имена и хеши паролей у прежних посетителей */
