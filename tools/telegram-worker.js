@@ -12,6 +12,8 @@
  *   ALLOWED_ORIGIN  — адреса сайта без слэша в конце, через запятую, например
  *                     https://vamzid.pages.dev,https://viktorkyrboba.github.io
  * Необязательно: привязка Rate Limiting с именем RL (ограничение частоты по IP).
+ *   REVIEWS         — привязка KV (Bindings → KV namespace): хранилище оценок и отзывов на сайте.
+ *                     Без неё заказы работают, а отзывы просто отправляются в Telegram.
  *
  * Персональные данные заказа не сохраняются и не пишутся в логи: Worker только
  * проверяет их и пересылает одним сообщением в Telegram.
@@ -31,6 +33,16 @@ function json(data, status, cors) {
 const str = (v, max) => (typeof v === "string" ? v.trim().replace(/\s+/g, " ").slice(0, max) : "");
 // убираем управляющие символы, чтобы нельзя было «нарисовать» в сообщении поддельные строки
 const clean = (v, max) => str(v, max).replace(/[\u0000-\u001f\u007f\u202a-\u202e\u2066-\u2069]/g, "");
+
+
+// ---- отзывы и оценки (хранятся в KV, привязка REVIEWS) ----
+const sha = async (s) => [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)))].slice(0, 12).map((x) => x.toString(16).padStart(2, "0")).join("");
+const keyOf = (v) => clean(v, 120);
+const pub = (r) => ({ s: r.s, a: r.a, t: r.t, d: r.d });
+
+async function getReviews(env, name) {
+  try { const l = JSON.parse((await env.REVIEWS.get("r:" + name)) || "[]"); return Array.isArray(l) ? l : []; } catch { return []; }
+}
 
 function validate(o) {
   if (!o || typeof o !== "object") return "bad request";
@@ -85,13 +97,19 @@ export default {
     const allowed = list.includes(origin) ? origin : "";
     const cors = {
       "Access-Control-Allow-Origin": allowed,
-      "Access-Control-Allow-Methods": "POST",
+      "Access-Control-Allow-Methods": "GET, POST",
       "Access-Control-Allow-Headers": "Content-Type",
       "Access-Control-Max-Age": "86400",
       Vary: "Origin",
     };
     if (!allowed) return json({ ok: false, error: "forbidden" }, 403, {});
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
+    const url = new URL(req.url);
+    if (req.method === "GET" && url.pathname === "/reviews") {
+      const name = keyOf(url.searchParams.get("p"));
+      if (!env.REVIEWS || !name) return json({ ok: false, error: "disabled" }, 503, cors);
+      return json({ ok: true, reviews: (await getReviews(env, name)).map(pub) }, 200, cors);
+    }
     if (req.method !== "POST") return json({ ok: false, error: "method" }, 405, cors);
     if ((req.headers.get("Content-Type") || "").split(";")[0].trim() !== "application/json")
       return json({ ok: false, error: "type" }, 415, cors);
@@ -109,6 +127,31 @@ export default {
 
     // ловушка для ботов: скрытое поле заполняют только роботы — делаем вид, что всё хорошо
     if (typeof body.website === "string" && body.website !== "") return json({ ok: true, id: "" }, 200, cors);
+
+    if (url.pathname === "/review") {
+      const name = keyOf(body.p), s = body.s, a = clean(body.a, 40) || "Покупатель", t = clean(body.t, 500);
+      if (!name || !Number.isInteger(s) || s < 1 || s > 5) return json({ ok: false, error: "review" }, 422, cors);
+      if (!env.REVIEWS) return json({ ok: false, error: "disabled" }, 503, cors);
+      const ip = req.headers.get("CF-Connecting-IP") || "unknown", day = new Date().toISOString().slice(0, 10);
+      const dk = "d:" + (await sha(ip + "|" + name + "|" + day)), ik = "i:" + (await sha(ip + "|" + day));
+      if (await env.REVIEWS.get(dk)) return json({ ok: false, error: "duplicate" }, 429, cors);
+      const cnt = +((await env.REVIEWS.get(ik)) || 0);
+      if (cnt >= 5) return json({ ok: false, error: "too many requests" }, 429, cors);
+      await env.REVIEWS.put(dk, "1", { expirationTtl: 86400 });
+      await env.REVIEWS.put(ik, String(cnt + 1), { expirationTtl: 86400 });
+      const r = { s, a, t, d: day };
+      const list = await getReviews(env, name);
+      list.unshift(r);
+      await env.REVIEWS.put("r:" + name, JSON.stringify(list.slice(0, 200)));
+      // уведомление владельцу (не мешает публикации)
+      try {
+        await fetch(`https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage`, {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: env.CHAT_ID, text: `⭐ Новый отзыв: ${name}\nОценка: ${s} из 5\nИмя: ${a}${t ? "\nОтзыв: " + t : ""}`, disable_web_page_preview: true }),
+        });
+      } catch {}
+      return json({ ok: true, review: pub(r) }, 200, cors);
+    }
 
     const o = validate(body);
     if (typeof o === "string") return json({ ok: false, error: o }, 422, cors);

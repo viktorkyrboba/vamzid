@@ -201,12 +201,26 @@ body:not(.cpg) #cpage{display:none}
 .pimg img{width:100%;height:100%;object-fit:contain}
 .pin{padding:12px 14px 16px;display:grid;gap:6px;flex:1}
 .pin small{color:var(--mute)}
+.trust{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.trust li{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:44px 1fr;column-gap:12px;align-items:center}
+.trust i{grid-row:span 2;width:44px;height:44px;border-radius:50%;background:var(--brand);color:#1d1a17;display:grid;place-items:center;font-style:normal;font-size:20px;font-weight:800}
+.trust b{font-size:1rem}.trust span{color:var(--mute);font-size:.88rem;line-height:1.3}
+.stars{position:relative;display:inline-block;font-size:18px;line-height:1;letter-spacing:2px;white-space:nowrap;vertical-align:middle}.stars .sb{color:#cfcac3}.stars .sf{position:absolute;left:0;top:0;overflow:hidden;color:#f5a400}
+.rsum{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;margin:6px 0 14px}.rbig b{font-size:2.4rem;line-height:1}.rbig>span{color:var(--mute);font-weight:700;margin-left:4px}.rbig small{display:block;color:var(--mute);margin-top:4px}
+.rbars{display:grid;gap:6px}.rbar{display:grid;grid-template-columns:30px 1fr 24px;gap:8px;align-items:center;font-size:.85rem;color:var(--mute);min-height:0;padding:0}.rbar i{height:8px;border-radius:5px;background:var(--line);overflow:hidden;display:block}.rbar u{display:block;height:100%;background:#f5a400;text-decoration:none}.rbar em{font-style:normal;text-align:right}
+.rtop{margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}.rlink{color:var(--mute);font-size:.9rem}
+.rform input[name=a]{font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:inherit}.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}.rvi small{color:var(--mute);margin-left:6px}
+.rvl{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:10px}.rvi{border-top:1px solid var(--line);padding-top:10px}.rvi p{margin:6px 0 0}
+.rform{border-top:1px solid var(--line);padding-top:14px;display:grid;gap:10px;max-width:520px}.rform fieldset{border:0;padding:0;margin:0}.rform legend{font-weight:700;padding:0;margin-bottom:6px}
+.pick{display:flex;gap:4px}.st{font-size:34px;line-height:1;background:none;border:0;color:#cfcac3;cursor:pointer;padding:2px 4px;min-width:44px;min-height:44px}.st.on{color:#f5a400}.st:focus-visible{outline:3px solid var(--brand);border-radius:8px}
+.rform label{display:grid;gap:6px;font-weight:600}.rform textarea{font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:inherit;resize:vertical}
+@media(max-width:700px){.trust{grid-template-columns:1fr}.pinfo{grid-template-columns:1fr}.rsum{grid-template-columns:1fr;gap:12px}}
 .plink{color:inherit;text-decoration:none;display:block}.plink:hover b{color:var(--brand-d)}
 .prod{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;align-items:start}
 .prod-img{aspect-ratio:1/1;background:#fff;border-radius:12px;display:grid;place-items:center;font-size:64px;overflow:hidden}.prod-img img{width:100%;height:100%;object-fit:contain}
 .prod-main h2{margin:0 0 8px}.prod-d{color:var(--mute);margin:0 0 14px}.prod-price{font-size:2rem;font-weight:800;color:var(--brand-d);margin:0 0 16px}
 .prod-main .row{display:flex;flex-wrap:wrap;gap:10px}
-.pinfo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}
+.pinfo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
 .pinfo section,.prev{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
 .pinfo h3,.prev h3{margin:0 0 8px;font-size:1.05rem}.pinfo ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--mute)}.prev{margin-top:16px}
 @media(max-width:700px){.prod{grid-template-columns:1fr;padding:14px;gap:16px}.pinfo{grid-template-columns:1fr}.prod-price{font-size:1.7rem}}
@@ -526,7 +540,7 @@ em.mk::after{content:"";position:absolute;left:-.04em;right:-.06em;bottom:-.16em
 <p class="hint">Обновлено: 2 ноября 2026 (добавлено оформление заказа). Коротко и честно: какие данные проходят через сайт и где они оказываются.</p>
 <h3>Кто отвечает за данные</h3><p>«Все Для Дома» (Vamzid GRUP), Lomonosov 16, Ceadîr-Lunga, тел. (0291) 2-39-14.</p>
 <h3>Что сайт хранит у вас</h3><p>Только содержимое корзины — в памяти вашего браузера (localStorage), чтобы корзина не пропадала при обновлении страницы. Имя, телефон и адрес из формы заказа на устройстве не сохраняются. Очистить корзину можно кнопкой в корзине или очисткой данных сайта в браузере.</p>
-<h3>Заказ</h3><p>Чтобы выполнить заказ, мы получаем имя, фамилию, телефон, адрес доставки (если выбрана доставка), способ оплаты, комментарий и список товаров. Данные используются только для связи с вами, подтверждения и доставки заказа. Заказ передаётся магазину в Telegram через защищённый сервер-посредник (Cloudflare), который ничего не сохраняет. Основание — ваше согласие и выполнение заказа по вашей просьбе.</p>
+<h3>Заказ</h3><p>Чтобы выполнить заказ, мы получаем имя, фамилию, телефон, адрес доставки (если выбрана доставка), способ оплаты, комментарий и список товаров. Данные используются только для связи с вами, подтверждения и доставки заказа. Заказ передаётся магазину в Telegram через защищённый сервер-посредник (Cloudflare), который ничего не сохраняет. Основание — ваше согласие и выполнение заказа по вашей просьбе.</p><h3>Отзывы и оценки</h3><p>Если вы оставляете отзыв, мы публикуем на странице товара оценку, имя (если вы его указали), текст и дату. Эти данные видны всем посетителям, поэтому не пишите в отзыве телефон, адрес и другие личные сведения. Для защиты от спама сервер на время до 24 часов хранит обезличенную контрольную сумму (хеш) вашего адреса в сети — по ней нельзя восстановить сам адрес. Чтобы удалить свой отзыв, позвоните в магазин или напишите нам в Telegram.</p>
 <h3>Что вы отправляете сами</h3><p>Кнопки «Написать в Telegram» открывают Telegram с готовым текстом. Магазин получит сообщение, только если вы сами нажмёте «Отправить». Дальше переписка хранится в Telegram и обрабатывается магазином, чтобы ответить на ваш вопрос.</p>
 <h3>Сторонние сервисы</h3><p>Сайт размещён на GitHub Pages: как любой хостинг, GitHub технически получает IP-адрес и данные браузера при открытии страницы. Telegram, Instagram и Google Maps открываются только по вашему нажатию и работают по своим правилам. Эти сервисы могут обрабатывать данные за пределами Молдовы.</p>
 <h3>Чего мы не делаем</h3><p>Не ставим cookies, не подключаем аналитику, рекламу и счётчики, не продаём и не передаём данные третьим лицам.</p>
@@ -679,21 +693,45 @@ const body=list.length?'<div class="pgrid">'+list.map(p=>`<article class="pcard"
 $("#cpbody").innerHTML=`<nav class="crumbs" aria-label="Путь">${cr}</nav><h2>${esc(title)}</h2>${nav}${body}<p style="margin-top:22px"><a class="back" href="#catalog">← Вернуться в каталог</a></p>`;
 document.title=title+" — Все Для Дома";const h=$("#cpbody h2");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}}
 function pimg(p){return p.img&&/^(img\/|https:\/\/|data:image\/)/.test(p.img)?`<img src="${esc(p.img)}" alt="${esc(p.n)}" loading="lazy">`:'<span aria-hidden="true">📦</span>'}
+function starsEl(v){return `<span class="stars" role="img" aria-label="Оценка ${v} из 5"><span class="sb">★★★★★</span><span class="sf" style="width:${Math.max(0,Math.min(5,v))*20}%">★★★★★</span></span>`}
+const pkey=p=>p.id||p.n;
+function sumHtml(l,state){const n=l.length,avg=n?l.reduce((t,r)=>t+r.s,0)/n:0;
+const bars=[5,4,3,2,1].map(k=>{const c=l.filter(r=>r.s===k).length;return `<div class="rbar"><span>${k}★</span><i><u style="width:${n?c/n*100:0}%"></u></i><em>${c}</em></div>`}).join("");
+const list=n?`<ul class="rvl">${l.map(r=>`<li class="rvi"><div>${starsEl(r.s)} <b>${esc(r.a||"Покупатель")}</b> <small>${esc(r.d||"")}</small></div>${r.t?`<p>${esc(r.t)}</p>`:""}</li>`).join("")}</ul>`:`<p class="prod-d">${state==="load"?"Загружаем отзывы…":"Об этом товаре пока нет отзывов. Купили — оцените, это поможет другим покупателям."}</p>`;
+return `<div class="rsum"><div class="rbig"><b>${n?avg.toFixed(1).replace(".",","):"0"}</b><span>/ 5</span><div>${starsEl(avg)}</div><small>${n?"Отзывов: "+n:"Оценок пока нет"}</small></div><div class="rbars">${bars}</div></div>${list}`}
+function topRate(l){const n=l.length;return n?`${starsEl(l.reduce((t,r)=>t+r.s,0)/n)} <a href="#revs" class="rlink">${(l.reduce((t,r)=>t+r.s,0)/n).toFixed(1).replace(".",",")} · отзывов: ${n}</a>`:'<a href="#revs" class="rlink">Оценок пока нет — оставить отзыв</a>'}
+function showRev(l,state){const a=$("#rsl"),t=$("#rtop");if(a)a.innerHTML=sumHtml(l,state);if(t)t.innerHTML=topRate(l)}
+async function loadRev(p){showRev([],"load");if(!ORDER_ENDPOINT){showRev([]);return}
+try{const r=await fetch(ORDER_ENDPOINT+"reviews?p="+encodeURIComponent(pkey(p)),{cache:"no-store"});const d=await r.json();showRev(d&&d.ok&&Array.isArray(d.reviews)?d.reviews:[])}catch(e){showRev([])}}
+function reviewsHtml(p){return `<section class="prev" id="revs"><h3>Отзывы и оценки</h3><div id="rsl">${sumHtml([],"load")}</div>
+<form class="rform" data-rf="${esc(pkey(p))}" data-rn="${esc(p.n)}" novalidate><fieldset><legend>Ваша оценка</legend><div class="pick" role="radiogroup" aria-label="Оценка">${[1,2,3,4,5].map(k=>`<button type="button" class="st" role="radio" aria-checked="false" aria-label="${k} из 5" data-star="${k}">★</button>`).join("")}</div></fieldset>
+<label>Имя (необязательно)<input name="a" maxlength="40" autocomplete="off" placeholder="Как вас подписать"></label>
+<label>Отзыв (необязательно)<textarea name="t" maxlength="500" rows="3" placeholder="Что понравилось, что нет"></textarea></label>
+<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button class="btn" type="submit">Отправить отзыв</button><p class="prod-d" style="margin:8px 0 0;font-size:.85rem">Имя и текст отзыва будут видны всем посетителям сайта. Не указывайте телефон и адрес.</p></form></section>`}
 function drawProduct(id){const p=PRODUCTS[id],ri=MENU.findIndex(r=>r[0]===p.r),gi=ri<0?-1:MENU[ri][1].findIndex(g=>g[0]===p.g),xi=gi<0?-1:MENU[ri][1][gi][1].indexOf(p.x);
 let cr='<a href="#catalog">Каталог</a>';if(ri>=0){cr+=`<span aria-hidden="true">›</span><a href="#/c/${ri}">${esc(p.r)}</a>`;if(gi>=0){cr+=`<span aria-hidden="true">›</span><a href="#/c/${ri}/${gi}">${esc(p.g)}</a>`;if(xi>=0)cr+=`<span aria-hidden="true">›</span><a href="#/c/${ri}/${gi}/${xi}">${esc(p.x)}</a>`}}
 const back=xi>=0?`#/c/${ri}/${gi}/${xi}`:"#catalog";
 $("#cpbody").innerHTML=`<nav class="crumbs" aria-label="Путь">${cr}<span aria-hidden="true">›</span><span>${esc(p.n)}</span></nav>
-<article class="prod"><div class="prod-img">${pimg(p)}</div><div class="prod-main"><h2>${esc(p.n)}</h2>${p.d?`<p class="prod-d">${esc(p.d)}</p>`:""}${typeof p.p==="number"?`<p class="prod-price">${esc(money(p.p))}</p>`:'<p class="prod-d">Цену уточняйте у магазина.</p>'}
+<article class="prod"><div class="prod-img">${pimg(p)}</div><div class="prod-main"><h2>${esc(p.n)}</h2>${p.d?`<p class="prod-d">${esc(p.d)}</p>`:""}<p class="rtop" id="rtop"></p>${typeof p.p==="number"?`<p class="prod-price">${esc(money(p.p))}</p>`:'<p class="prod-d">Цену уточняйте у магазина.</p>'}
 <div class="row"><button class="btn" data-add="${id}">В корзину</button><button class="btn alt" data-tgask="${esc(p.n)}|${esc(p.r)}">Спросить в Telegram</button></div></div></article>
+<ul class="trust" aria-label="Преимущества"><li><i aria-hidden="true">✔</i><b>100% оригинальные товары</b><span>Только фирменная продукция</span></li><li><i aria-hidden="true">🛡</i><b>Гарантия качества</b><span>Права покупателя защищены законом о защите прав потребителей</span></li><li><i aria-hidden="true">🕒</i><b>Заказ 24/7</b><span>Оформляйте заказ на сайте в любое время — мы свяжемся с вами</span></li></ul>
 <div class="pinfo"><section><h3>🚚 Получение</h3><ul><li>Самовывоз из магазина: Ломоносова 16, Чадыр-Лунга</li><li>Доставка — выберите при оформлении заказа; стоимость и сроки уточнит магазин по телефону</li></ul></section>
-<section><h3>💳 Оплата</h3><ul><li>Наличными при получении</li><li>Картой при получении</li></ul></section>
-<section><h3>🛡 Гарантия</h3><ul><li>Условия гарантии и возврата уточняйте в магазине: (0291) 2-39-14</li></ul></section></div>
-<section class="prev"><h3>Отзывы</h3><p class="prod-d">Отзывов об этом товаре пока нет. Купили его — расскажите, как он вам.</p><button class="btn alt" data-tgrev="${esc(p.n)}">Написать отзыв</button></section>
+<section><h3>💳 Оплата</h3><ul><li>Наличными при получении</li><li>Картой при получении</li></ul></section></div>
+${reviewsHtml(p)}
 <p style="margin-top:22px"><a class="back" href="${back}">← Назад к товарам</a></p>`;
-document.title=p.n+" — Все Для Дома";const h=$("#cpbody h2");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}}
+document.title=p.n+" — Все Для Дома";const h=$("#cpbody h2");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}loadRev(p)}
 $("#cpbody").addEventListener("click",e=>{const a=e.target.closest("[data-add]");if(a){const p=PRODUCTS[+a.dataset.add];if(p)addCart(p.n,p.r,p.p);return}
-const rv=e.target.closest("[data-tgrev]");if(rv){tgSend("Здравствуйте! Хочу оставить отзыв о товаре: "+rv.dataset.tgrev+"\n\nМой отзыв: ");return}
+const st=e.target.closest("[data-star]");if(st){const f=st.closest("form"),v=+st.dataset.star;f.dataset.v=v;f.querySelectorAll(".st").forEach(b=>{const on=+b.dataset.star<=v;b.classList.toggle("on",on);b.setAttribute("aria-checked",+b.dataset.star===v)});return}
 const q=e.target.closest("[data-tgask]");if(q){const v=q.dataset.tgask.split("|");tgSend("Здравствуйте! Интересует: "+v[0]+" ("+v[1]+")")}});
+$("#cpbody").addEventListener("submit",async e=>{const f=e.target.closest("[data-rf]");if(!f)return;e.preventDefault();const v=+f.dataset.v||0;if(!v){toast("Сначала поставьте оценку звёздами");return}
+const body={p:f.dataset.rf,s:v,a:f.elements.a.value.trim(),t:f.elements.t.value.trim(),website:f.elements.website.value},btn=f.querySelector(".btn"),tg=()=>tgSend("Здравствуйте! Отзыв о товаре: "+f.dataset.rn+"\nОценка: "+v+" из 5 "+"★".repeat(v)+(body.t?"\nОтзыв: "+body.t:""));
+if(!ORDER_ENDPOINT){tg();return}
+btn.disabled=true;let st=0;try{const r=await fetch(ORDER_ENDPOINT+"review",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});st=r.status}catch(x){}
+btn.disabled=false;
+if(st===200){toast("Спасибо! Ваш отзыв опубликован");f.reset();f.dataset.v="";f.querySelectorAll(".st").forEach(b=>{b.classList.remove("on");b.setAttribute("aria-checked","false")});const p=PRODUCTS.find(x=>pkey(x)===f.dataset.rf);if(p)loadRev(p)}
+else if(st===429)toast("Отзыв об этом товаре уже отправлен. Спасибо!");
+else tg()});
 function route(){const pm=location.hash.match(/^#\/p\/(\d+)$/);if(pm&&PRODUCTS[+pm[1]]){drawProduct(+pm[1]);document.body.classList.add("cpg");scrollTo({top:0,behavior:"instant"});return}
 const m=location.hash.match(/^#\/c\/(\d+)(?:\/(\d+))?(?:\/(\d+))?$/);
 if(m){const i=+m[1],j=m[2]!=null?+m[2]:null,k=m[3]!=null?+m[3]:null;
