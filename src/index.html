@@ -3505,12 +3505,14 @@ else tg()});
 let WARM=0;function warm(){if(!CUR||location.hash!==CUR.key)return;const k=CUR.key,from=Math.min(CUR.list.length,PAGED[k]||PAGE),L=CUR.list.slice(from,from+PAGE).map(p=>p.img2&&IMGOK.test(p.img2)?thumbOf(p.img2):p.img&&IMGOK.test(p.img)?p.img:"").filter(Boolean),id=++WARM;let i=0;(function nx(){if(id!==WARM||i>=L.length)return;new Image().src=L[i++];setTimeout(nx,120)})()}
 function enter(){pimg.n=0;setTimeout(warm,800);const c=$("#cpbody");c.classList.remove("enter");void c.offsetWidth;c.classList.add("enter")}
 let LASTH="";const SCR={};
-function route(){const prev=LASTH;if(prev)SCR[prev]=scrollY;LASTH=location.hash;const pm=location.hash.match(/^#\/p\/(\d+)$/);if(pm&&PRODUCTS[+pm[1]]){drawProduct(+pm[1]);enter();document.body.classList.add("cpg");scrollTo({top:0,behavior:"instant"});return}
+function route(){const prev=LASTH;SCR[prev||"#"]=scrollY;LASTH=location.hash;const pm=location.hash.match(/^#\/p\/(\d+)$/);if(pm&&PRODUCTS[+pm[1]]){drawProduct(+pm[1]);enter();document.body.classList.add("cpg");scrollTo({top:0,behavior:"instant"});return}
 const m=location.hash.match(/^#\/c\/(\d+)(?:\/(\d+))?(?:\/(\d+))?$/);
 if(m){const i=+m[1],j=m[2]!=null?+m[2]:null,k=m[3]!=null?+m[3]:null;
 if(MENU[i]&&(j==null||MENU[i][1][j])&&(k==null||MENU[i][1][j][1][k])){drawPage(i,j,k);enter();document.body.classList.add("cpg");const rs=prev.startsWith("#/p/")?SCR[location.hash]:null;scrollTo({top:rs||0,behavior:"instant"});return}}
 const was=document.body.classList.contains("cpg");document.body.classList.remove("cpg");document.title="Все Для Дома — Vamzid GRUP";
-if(was){const id=decodeURIComponent(location.hash.slice(1)),el=id&&document.getElementById(id);setTimeout(()=>el?el.scrollIntoView():scrollTo({top:0,behavior:"instant"}),0)}}
+if(was){const sv=SCR[location.hash||"#"],id=decodeURIComponent(location.hash.slice(1)),el=id&&document.getElementById(id);setTimeout(()=>sv!=null?scrollTo({top:sv,behavior:"instant"}):el?el.scrollIntoView():scrollTo({top:0,behavior:"instant"}),0)}}
+/* нажатие на якорную ссылку («Каталог» и т.п.) — не возврат: запомненную позицию не используем */
+document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest("a[href^='#']");if(a){const h=a.getAttribute("href");if(!h.startsWith("#/"))delete SCR[h]}},true);
 addEventListener("hashchange",route);
 
 /* ===== ЗВОНОК: окно с номерами + копирование (прямой tel: может блокироваться) ===== */
