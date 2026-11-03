@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <script>document.documentElement.className+=" js"</script>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-pfgOMgfVZwm2ODyms34QYW9h8EwicylhV77q5LHK8c0=' 'sha256-z3vGdk4Z2sV4DBsUNMovCQX1JlQZU1rCBeroK8hAH/E='; style-src 'unsafe-inline'; img-src 'self' data: https://vamzid.md; connect-src https://vdd-orders.victorcirboba.workers.dev; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-pfgOMgfVZwm2ODyms34QYW9h8EwicylhV77q5LHK8c0=' 'sha256-E9GcOYt7fQjXjdKJ2FIHyvtoy+Ae2UtZq1MRSOjnmQI='; style-src 'unsafe-inline'; img-src 'self' data: https://vamzid.md; connect-src 'self' https://vdd-orders.victorcirboba.workers.dev; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Все Для Дома (Vamzid GRUP) — товары для дома и ремонта в Ceadîr-Lunga: обогреватели, освещение, электрика, краски, посуда, сад и многое другое.">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HardwareStore", "name": "Все Для Дома", "parentOrganization": {"@type": "Organization", "name": "Vamzid GRUP"}, "description": "Товары для дома и ремонта", "telephone": "+37329123914", "address": {"@type": "PostalAddress", "streetAddress": "Lomonosov 16", "addressLocality": "Ceadîr-Lunga", "addressCountry": "MD"}, "sameAs": ["https://www.instagram.com/vamzid.md/"], "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "17:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "08:00", "closes": "14:00"}]}</script>
@@ -201,6 +201,7 @@ body:not(.cpg) #cpage{display:none}
 .prod-img,.prod-main>*{animation:rise .3s ease-out both}
 .prod-main>*:nth-child(2){animation-delay:.05s}.prod-main>*:nth-child(3){animation-delay:.1s}.prod-main>*:nth-child(4){animation-delay:.15s}.prod-main>*:nth-child(5){animation-delay:.2s}.prod-main>*:nth-child(6){animation-delay:.25s}
 .btn.added{background:#2e9d5b;color:#fff;transition:background-color .2s}
+.specs{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}.specs li{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.95rem}.specs span{color:var(--mute)}.specs b{font-weight:600;text-align:right;overflow-wrap:anywhere}.prod-src{font-size:.8rem;color:var(--mute);margin:-6px 0 12px}.prod-note{font-size:.9rem}
 .more .btn{transition:transform .12s,background-color .2s}
 @media (prefers-reduced-motion:reduce){#cpbody.enter,.pgrid .pcard,.prod-img,.prod-main>*{animation:none}.pcard,.pimg img,.chips a{transition:none}.pcard:hover,.pcard:hover .pimg img{transform:none}}
 
@@ -3461,18 +3462,25 @@ function reviewsHtml(p){return `<section class="prev" id="revs"><h3>Отзывы
 <label>Отзыв (необязательно)<textarea name="t" maxlength="500" rows="3" placeholder="Что понравилось, что нет"></textarea></label>
 <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
 <button class="btn" type="submit">Отправить отзыв</button><p class="prod-d" style="margin:8px 0 0;font-size:.85rem">Имя и текст отзыва будут видны всем посетителям сайта. Не указывайте телефон и адрес.</p></form></section>`}
+let DESC=null,DESCP=null;
+function loadDesc(){if(DESC)return Promise.resolve(DESC);if(!DESCP)DESCP=fetch("desc.json").then(r=>r.ok?r.json():{}).then(j=>(DESC=j)).catch(()=>(DESC={}));return DESCP}
+function descFill(p){loadDesc().then(m=>{const e=$("#pdesc");if(!e||!PRODUCTS[(location.hash.match(/^#\/p\/(\d+)$/)||[])[1]]||PRODUCTS[+location.hash.slice(4)]!==p)return;const r=m[p.code];let h="";
+if(r&&r[0])h+=`<p class="prod-d">${esc(r[0])}</p>`;
+if(r&&r[1])h+='<ul class="specs">'+r[1].split("; ").map(t=>{const i=t.indexOf(": ");return i>0?`<li><span>${esc(t.slice(0,i))}</span><b>${esc(t.slice(i+2))}</b></li>`:`<li><b>${esc(t)}</b></li>`}).join("")+"</ul>";
+if(r&&r[2])h+=`<p class="prod-src">Источник данных: ${esc(r[2])}</p>`;
+h+='<p class="prod-d prod-note">Наличие и подробности уточняйте у продавца: (0291) 2-39-14 или в Telegram.</p>';e.innerHTML=h})}
 function drawProduct(id){const p=PRODUCTS[id],ri=MENU.findIndex(r=>r[0]===p.r),gi=ri<0?-1:MENU[ri][1].findIndex(g=>g[0]===p.g),xi=gi<0?-1:MENU[ri][1][gi][1].indexOf(p.x);
 let cr='<a href="#catalog">Каталог</a>';if(ri>=0){cr+=`<span aria-hidden="true">›</span><a href="#/c/${ri}">${esc(p.r)}</a>`;if(gi>=0){cr+=`<span aria-hidden="true">›</span><a href="#/c/${ri}/${gi}">${esc(p.g)}</a>`;if(xi>=0&&p.x!==p.g)cr+=`<span aria-hidden="true">›</span><a href="#/c/${ri}/${gi}/${xi}">${esc(p.x)}</a>`}}
 const back=xi>=0?`#/c/${ri}/${gi}/${xi}`:"#catalog";
 $("#cpbody").innerHTML=`<nav class="crumbs" aria-label="Путь">${cr}<span aria-hidden="true">›</span><span>${esc(p.n)}</span></nav>
-<article class="prod"><div class="prod-img">${pimg(p,true)}</div><div class="prod-main"><h2>${esc(p.n)}</h2>${p.code?`<p class="prod-code">Код товара: ${esc(p.code)}</p>`:""}${p.d?`<p class="prod-d">${esc(p.d)}</p>`:`<p class="prod-d">Характеристики и наличие уточняйте у продавца: по телефону (0291) 2-39-14 или в Telegram.</p>`}<p class="rtop" id="rtop"></p>${typeof p.p==="number"?`<p class="prod-price">${esc(money(p.p))}</p>`:'<p class="prod-d">Цену уточняйте у магазина.</p>'}
+<article class="prod"><div class="prod-img">${pimg(p,true)}</div><div class="prod-main"><h2>${esc(p.n)}</h2>${p.code?`<p class="prod-code">Код товара: ${esc(p.code)}</p>`:""}${p.d?`<p class="prod-d">${esc(p.d)}</p>`:'<div id="pdesc"></div>'}<p class="rtop" id="rtop"></p>${typeof p.p==="number"?`<p class="prod-price">${esc(money(p.p))}</p>`:'<p class="prod-d">Цену уточняйте у магазина.</p>'}
 <div class="row"><button class="btn" data-add="${id}">В корзину</button><button class="btn alt" data-tgask="${esc(p.n)}|${esc(p.r)}">Спросить в Telegram</button></div></div></article>
 <ul class="trust" aria-label="Преимущества"><li><i aria-hidden="true">✔</i><b>100% оригинальные товары</b><span>Только фирменная продукция</span></li><li><i aria-hidden="true">🛡</i><b>Гарантия качества</b><span>Права покупателя защищены законом о защите прав потребителей</span></li><li><i aria-hidden="true">🕒</i><b>Заказ 24/7</b><span>Оформляйте заказ на сайте в любое время — мы свяжемся с вами</span></li></ul>
 <div class="pinfo"><section><h3>🚚 Получение</h3><ul><li>Самовывоз из магазина: Ломоносова 16, Чадыр-Лунга</li><li>Доставка — выберите при оформлении заказа; стоимость и сроки уточнит магазин по телефону</li></ul></section>
 <section><h3>💳 Оплата</h3><ul><li>Наличными при получении</li><li>Картой при получении</li></ul></section></div>
 ${reviewsHtml(p)}
 <p style="margin-top:22px"><a class="back" href="${back}">← Назад к товарам</a></p>`;
-document.title=p.n+" — Все Для Дома";const h=$("#cpbody h2");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}loadRev(p)}
+document.title=p.n+" — Все Для Дома";const h=$("#cpbody h2");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}loadRev(p);if(!p.d)descFill(p)}
 $("#cpbody").addEventListener("click",e=>{const mo=e.target.closest("[data-more]");if(mo&&CUR){const g=$("#pgrid"),have=g.children.length,to=Math.min(CUR.list.length,have+PAGE);g.insertAdjacentHTML("beforeend",CUR.list.slice(have,to).map(cardHtml).join(""));PAGED[CUR.key]=to;const m=$("#more");m.outerHTML=moreHtml(to,CUR.list.length);const nb=$("#more [data-more]")||$("#more");if(nb)nb.focus&&nb.focus({preventScroll:true});return}
 const a=e.target.closest("[data-add]");if(a){const p=PRODUCTS[+a.dataset.add];if(p){addCart(p.n+(p.code?" (код "+p.code+")":""),p.r,p.p);if(!a.classList.contains("added")){const o=a.textContent;a.classList.add("added");a.textContent="✓ Добавлено";setTimeout(()=>{a.classList.remove("added");a.textContent=o},1200)}}return}
 const st=e.target.closest("[data-star]");if(st){const f=st.closest("form"),v=+st.dataset.star;f.dataset.v=v;f.querySelectorAll(".st").forEach(b=>{const on=+b.dataset.star<=v;b.classList.toggle("on",on);b.setAttribute("aria-checked",+b.dataset.star===v)});return}

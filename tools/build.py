@@ -29,7 +29,7 @@ def order_origin():
 def csp(script_src):
     return ("<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; "
             f"script-src {script_src}; style-src 'unsafe-inline'; img-src 'self' data: https://vamzid.md; "
-            f"connect-src {order_origin()}; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; "
+            f"connect-src 'self' {order_origin()}; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; "
             "manifest-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'\">")
 
 def inline_hashes(html):
@@ -54,7 +54,7 @@ def build_cf():
     d.mkdir()
     (d / "index.html").write_text(page(SITE_CF), encoding="utf-8")
     shutil.copytree(ROOT / "img", d / "img")
-    for f in ["404.html", "robots.txt", "og.jpg", "_headers"]:
+    for f in ["404.html", "robots.txt", "og.jpg", "_headers", "desc.json"]:
         shutil.copy(ROOT / f, d / f)
     print("dist/", sum(p.stat().st_size for p in d.rglob("*") if p.is_file()) // 1024, "KB")
 
