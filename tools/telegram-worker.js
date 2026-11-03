@@ -120,10 +120,13 @@ export default {
       if (!success) return json({ ok: false, error: "too many requests" }, 429, cors);
     }
 
+    if (+(req.headers.get("Content-Length") || 0) > MAX_BODY) return json({ ok: false, error: "too large" }, 413, cors);
     const raw = await req.text();
     if (raw.length > MAX_BODY) return json({ ok: false, error: "too large" }, 413, cors);
     let body;
     try { body = JSON.parse(raw); } catch { return json({ ok: false, error: "json" }, 400, cors); }
+
+    if (!body || typeof body !== "object" || Array.isArray(body)) return json({ ok: false, error: "json" }, 400, cors);
 
     // ловушка для ботов: скрытое поле заполняют только роботы — делаем вид, что всё хорошо
     if (typeof body.website === "string" && body.website !== "") return json({ ok: true, id: "" }, 200, cors);
@@ -141,6 +144,11 @@ export default {
       await env.REVIEWS.put(ik, String(cnt + 1), { expirationTtl: 86400 });
       const r = { s, a, t, d: day };
       const list = await getReviews(env, name);
+      if (!list.length) {
+        const gk = "g:" + day, gc = +((await env.REVIEWS.get(gk)) || 0);
+        if (gc >= 200) return json({ ok: false, error: "too many requests" }, 429, cors);
+        await env.REVIEWS.put(gk, String(gc + 1), { expirationTtl: 172800 });
+      }
       list.unshift(r);
       await env.REVIEWS.put("r:" + name, JSON.stringify(list.slice(0, 200)));
       // уведомление владельцу (не мешает публикации)

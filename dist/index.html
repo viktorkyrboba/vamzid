@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <script>document.documentElement.className+=" js"</script>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-pfgOMgfVZwm2ODyms34QYW9h8EwicylhV77q5LHK8c0=' 'sha256-+d7IcYYxHofv/JXoYvkPreE2f6LolEzTyU1eSbMKV+U='; style-src 'unsafe-inline'; img-src 'self' data: https://vamzid.md; connect-src 'self' https://vdd-orders.victorcirboba.workers.dev; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-pfgOMgfVZwm2ODyms34QYW9h8EwicylhV77q5LHK8c0=' 'sha256-SbKc0qDKQcO9ig5MljP+q8t62nGUDoYGU/pNSLS97YQ='; style-src 'unsafe-inline'; img-src 'self' data: https://vamzid.md; connect-src 'self' https://vdd-orders.victorcirboba.workers.dev; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Все Для Дома (Vamzid GRUP) — товары для дома и ремонта в Ceadîr-Lunga: обогреватели, освещение, электрика, краски, посуда, сад и многое другое.">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "HardwareStore", "name": "Все Для Дома", "parentOrganization": {"@type": "Organization", "name": "Vamzid GRUP"}, "description": "Товары для дома и ремонта", "telephone": "+37329123914", "address": {"@type": "PostalAddress", "streetAddress": "Lomonosov 16", "addressLocality": "Ceadîr-Lunga", "addressCountry": "MD"}, "sameAs": ["https://www.instagram.com/vamzid.md/"], "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "18:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "17:00"}, {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "08:00", "closes": "14:00"}]}</script>
@@ -3316,7 +3316,7 @@ PRODUCTS.forEach(p=>{if(p.im)p.img2="https://vamzid.md/image/catalog/"+p.im.spli
 /* ===== ЛОГИКА ===== */
 const $=s=>document.querySelector(s);
 const wide=()=>matchMedia("(min-width:861px)").matches,hov=()=>wide()&&matchMedia("(hover:hover)").matches;
-const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 /* иконки рубрик (по порядку MENU); новая рубрика без иконки получит пустую */
 const RUB_ICONS=["<path d=\"M3 14l2-6h14l2 6v4h-3M3 14v4h3M3 14h18\"/><circle cx=\"8\" cy=\"17.5\" r=\"1.7\"/><circle cx=\"16\" cy=\"17.5\" r=\"1.7\"/>", "<path d=\"M8 8h7l1 3v10H7V11zM9 8V5h4l3-2M18 5h2M18 8h2\"/>", "<path d=\"M14.5 6.5a4 4 0 0 0 5 5l-9 9a2.1 2.1 0 0 1-3-3l9-9a4 4 0 0 0-2-2z\"/>", "<path d=\"M4 10h16v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM2 10h20M9 6c0-1.6 1-1.6 1-3M14 6c0-1.6 1-1.6 1-3\"/>", "<path d=\"M12 21v-8M12 13c0-4-3-6-7-6 0 4 3 6 7 6zM12 16c0-3 2-5 6-5 0 3-2 5-6 5z\"/>", "<path d=\"M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4\"/>", "<path d=\"M3 7h18v5H3zM3 12h18v5H3zM9 7v5M15 12v5M6 17v3M18 17v3\"/>", "<path d=\"M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z\"/>", "<path d=\"M16 3l5 5L9 20l-6 1 1-6zM14 5l5 5\"/>"];
 function initCats(){
@@ -3347,7 +3347,7 @@ const load=(k,d)=>{try{const v=JSON.parse(st.get(k));return v==null?d:v}catch(e)
 /* раньше здесь был демо-кабинет: удаляем сохранённые им имена и хеши паролей у прежних посетителей */
 st.del("vdd_users");st.del("vdd_sess");
 const price=v=>typeof v==="number"&&isFinite(v)&&v>=0&&v<1e7?Math.round(v*100)/100:null;
-let cart=load("vdd_cart",[]);if(!Array.isArray(cart))cart=[];
+let cart=load("vdd_cart",[]);cart=Array.isArray(cart)?cart.filter(i=>i&&typeof i.n==="string"&&Number.isInteger(i.q)&&i.q>0&&i.q<100&&(i.p==null||typeof i.p==="number")).slice(0,50):[];
 cart=cart.filter(i=>i&&typeof i.n==="string"&&typeof i.r==="string"&&Number.isInteger(i.q)&&i.q>0).map(i=>({n:i.n.slice(0,120),r:i.r.slice(0,120),q:Math.min(99,i.q),p:price(i.p)}));
 const persist=()=>st.set("vdd_cart",JSON.stringify(cart));
 const money=v=>v.toLocaleString("ru-RU",{maximumFractionDigits:2})+" лей";
@@ -3450,7 +3450,7 @@ return `<div class="rsum"><div class="rbig"><b>${n?avg.toFixed(1).replace(".",",
 function topRate(l){const n=l.length;return n?`${starsEl(l.reduce((t,r)=>t+r.s,0)/n)} <a href="#revs" class="rlink">${(l.reduce((t,r)=>t+r.s,0)/n).toFixed(1).replace(".",",")} · отзывов: ${n}</a>`:'<a href="#revs" class="rlink">Оценок пока нет — оставить отзыв</a>'}
 function showRev(l,state){const a=$("#rsl"),t=$("#rtop");if(a)a.innerHTML=sumHtml(l,state);if(t)t.innerHTML=topRate(l)}
 async function loadRev(p){showRev([],"load");if(!ORDER_ENDPOINT){showRev([]);return}
-try{const r=await fetch(ORDER_ENDPOINT+"reviews?p="+encodeURIComponent(pkey(p)),{cache:"no-store"});const d=await r.json();showRev(d&&d.ok&&Array.isArray(d.reviews)?d.reviews:[])}catch(e){showRev([])}}
+try{const r=await fetch(ORDER_ENDPOINT+"reviews?p="+encodeURIComponent(pkey(p)),{cache:"no-store"});const d=await r.json();showRev(d&&d.ok&&Array.isArray(d.reviews)?d.reviews.slice(0,200).filter(x=>x&&Number.isInteger(x.s)&&x.s>=1&&x.s<=5).map(x=>({s:x.s,a:String(x.a||"").slice(0,40),t:String(x.t||"").slice(0,500),d:String(x.d||"").slice(0,10)})):[])}catch(e){showRev([])}}
 function reviewsHtml(p){return `<section class="prev" id="revs"><h3>Отзывы и оценки</h3><div id="rsl">${sumHtml([],"load")}</div>
 <form class="rform" data-rf="${esc(pkey(p))}" data-rn="${esc(p.n)}" novalidate><fieldset><legend>Ваша оценка</legend><div class="spick" role="radiogroup" aria-label="Оценка">${[1,2,3,4,5].map(k=>`<button type="button" class="st" role="radio" aria-checked="false" aria-label="${k} из 5" data-star="${k}">★</button>`).join("")}</div></fieldset>
 <label>Имя (необязательно)<input name="a" maxlength="40" autocomplete="off" placeholder="Как вас подписать"></label>
