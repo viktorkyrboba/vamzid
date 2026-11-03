@@ -187,6 +187,23 @@ body:not(.cpg) #cpage{display:none}
 .crumbs{font-size:14px;color:var(--mute);margin:0 0 12px;display:flex;flex-direction:row;flex-wrap:wrap;gap:4px 8px;align-items:center;position:static;background:none;padding:0;border:0}
 .crumbs a{color:inherit;text-decoration:underline;text-underline-offset:3px;padding:4px 0;border-radius:0}
 .crumbs a:hover{background:none}
+/* ===== лёгкие анимации (отключаются при prefers-reduced-motion) ===== */
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+#cpbody.enter{animation:rise .25s ease-out}
+.pgrid .pcard{animation:rise .3s ease-out both}
+.pgrid .pcard:nth-child(2){animation-delay:.025s}.pgrid .pcard:nth-child(3){animation-delay:.05s}.pgrid .pcard:nth-child(4){animation-delay:.075s}.pgrid .pcard:nth-child(5){animation-delay:.1s}.pgrid .pcard:nth-child(6){animation-delay:.125s}.pgrid .pcard:nth-child(7){animation-delay:.15s}.pgrid .pcard:nth-child(8){animation-delay:.175s}
+.pcard{transition:transform .25s ease,box-shadow .25s ease}
+.pimg img{transition:transform .5s ease}
+@media(hover:hover){.pcard:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(40,25,10,.09)}.pcard:hover .pimg img{transform:scale(1.02)}}
+.chips a{transition:background-color .18s,color .18s,border-color .18s,transform .12s}
+.chips a:active{transform:scale(.97)}
+.crumbs a,.back{transition:color .15s}
+.prod-img,.prod-main>*{animation:rise .3s ease-out both}
+.prod-main>*:nth-child(2){animation-delay:.05s}.prod-main>*:nth-child(3){animation-delay:.1s}.prod-main>*:nth-child(4){animation-delay:.15s}.prod-main>*:nth-child(5){animation-delay:.2s}.prod-main>*:nth-child(6){animation-delay:.25s}
+.btn.added{background:#2e9d5b;color:#fff;transition:background-color .2s}
+.more .btn{transition:transform .12s,background-color .2s}
+@media (prefers-reduced-motion:reduce){#cpbody.enter,.pgrid .pcard,.prod-img,.prod-main>*{animation:none}.pcard,.pimg img,.chips a{transition:none}.pcard:hover,.pcard:hover .pimg img{transform:none}}
+
 .more{text-align:center;margin:22px 0 4px}.more p{margin:0 0 10px;color:var(--mute);font-size:.95rem}
 .crumbs a:hover{color:var(--brand-d)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 24px}
@@ -3457,7 +3474,7 @@ ${reviewsHtml(p)}
 <p style="margin-top:22px"><a class="back" href="${back}">← Назад к товарам</a></p>`;
 document.title=p.n+" — Все Для Дома";const h=$("#cpbody h2");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}loadRev(p)}
 $("#cpbody").addEventListener("click",e=>{const mo=e.target.closest("[data-more]");if(mo&&CUR){const g=$("#pgrid"),have=g.children.length,to=Math.min(CUR.list.length,have+PAGE);g.insertAdjacentHTML("beforeend",CUR.list.slice(have,to).map(cardHtml).join(""));PAGED[CUR.key]=to;const m=$("#more");m.outerHTML=moreHtml(to,CUR.list.length);const nb=$("#more [data-more]")||$("#more");if(nb)nb.focus&&nb.focus({preventScroll:true});return}
-const a=e.target.closest("[data-add]");if(a){const p=PRODUCTS[+a.dataset.add];if(p)addCart(p.n+(p.code?" (код "+p.code+")":""),p.r,p.p);return}
+const a=e.target.closest("[data-add]");if(a){const p=PRODUCTS[+a.dataset.add];if(p){addCart(p.n+(p.code?" (код "+p.code+")":""),p.r,p.p);if(!a.classList.contains("added")){const o=a.textContent;a.classList.add("added");a.textContent="✓ Добавлено";setTimeout(()=>{a.classList.remove("added");a.textContent=o},1200)}}return}
 const st=e.target.closest("[data-star]");if(st){const f=st.closest("form"),v=+st.dataset.star;f.dataset.v=v;f.querySelectorAll(".st").forEach(b=>{const on=+b.dataset.star<=v;b.classList.toggle("on",on);b.setAttribute("aria-checked",+b.dataset.star===v)});return}
 const q=e.target.closest("[data-tgask]");if(q){const v=q.dataset.tgask.split("|");tgSend("Здравствуйте! Интересует: "+v[0]+" ("+v[1]+")")}});
 $("#cpbody").addEventListener("submit",async e=>{const f=e.target.closest("[data-rf]");if(!f)return;e.preventDefault();const v=+f.dataset.v||0;if(!v){toast("Сначала поставьте оценку звёздами");return}
@@ -3468,10 +3485,11 @@ btn.disabled=false;
 if(st===200){toast("Спасибо! Ваш отзыв опубликован");f.reset();f.dataset.v="";f.querySelectorAll(".st").forEach(b=>{b.classList.remove("on");b.setAttribute("aria-checked","false")});const p=PRODUCTS.find(x=>pkey(x)===f.dataset.rf);if(p)loadRev(p)}
 else if(st===429)toast("Отзыв об этом товаре уже отправлен. Спасибо!");
 else tg()});
-function route(){const pm=location.hash.match(/^#\/p\/(\d+)$/);if(pm&&PRODUCTS[+pm[1]]){drawProduct(+pm[1]);document.body.classList.add("cpg");scrollTo({top:0,behavior:"instant"});return}
+function enter(){const c=$("#cpbody");c.classList.remove("enter");void c.offsetWidth;c.classList.add("enter")}
+function route(){const pm=location.hash.match(/^#\/p\/(\d+)$/);if(pm&&PRODUCTS[+pm[1]]){drawProduct(+pm[1]);enter();document.body.classList.add("cpg");scrollTo({top:0,behavior:"instant"});return}
 const m=location.hash.match(/^#\/c\/(\d+)(?:\/(\d+))?(?:\/(\d+))?$/);
 if(m){const i=+m[1],j=m[2]!=null?+m[2]:null,k=m[3]!=null?+m[3]:null;
-if(MENU[i]&&(j==null||MENU[i][1][j])&&(k==null||MENU[i][1][j][1][k])){drawPage(i,j,k);document.body.classList.add("cpg");scrollTo({top:0,behavior:"instant"});return}}
+if(MENU[i]&&(j==null||MENU[i][1][j])&&(k==null||MENU[i][1][j][1][k])){drawPage(i,j,k);enter();document.body.classList.add("cpg");scrollTo({top:0,behavior:"instant"});return}}
 const was=document.body.classList.contains("cpg");document.body.classList.remove("cpg");document.title="Все Для Дома — Vamzid GRUP";
 if(was){const id=decodeURIComponent(location.hash.slice(1)),el=id&&document.getElementById(id);setTimeout(()=>el?el.scrollIntoView():scrollTo({top:0,behavior:"instant"}),0)}}
 addEventListener("hashchange",route);
