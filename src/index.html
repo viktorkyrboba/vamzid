@@ -3430,7 +3430,7 @@ const list=[];PRODUCTS.forEach((p,ix)=>{if(p.r===r[0]&&(!g||p.g===g[0])&&(!x||p.
 const key=location.hash,shown=Math.min(list.length,PAGED[key]||PAGE);CUR={list,key};
 const body=list.length?'<div class="pgrid" id="pgrid">'+list.slice(0,shown).map(cardHtml).join("")+"</div>"+moreHtml(shown,list.length)
 :`<div class="cempty"><p><b>Товары этого раздела скоро появятся на сайте.</b><br>А пока уточните наличие и цену у магазина — ответим быстро.</p><div class="row"><a class="btn" href="tel:+37329123914">Позвонить: (0291) 2-39-14</a></div></div>`;
-$("#cpbody").innerHTML=`<nav class="crumbs" aria-label="Путь">${cr}</nav><h2>${esc(title)}</h2>${nav}${body}<p style="margin-top:22px"><a class="back" href="#catalog">← Вернуться в каталог</a></p>`;
+$("#cpbody").innerHTML=`<nav class="crumbs" aria-label="Путь">${cr}</nav><h2>${esc(title)}</h2>${nav}${body}<p style="margin-top:22px"><a class="back" href="${k!=null?`#/c/${i}/${j}`:j!=null?`#/c/${i}`:"#catalog"}">← Назад</a></p>`;
 document.title=title+" — Все Для Дома";const h=$("#cpbody h2");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}}
 const IMGOK=/^(img\/|https:\/\/vamzid\.md\/|data:image\/)/;
 function thumbOf(u){return u.replace("/image/catalog/","/image/cache/catalog/").replace(/\.(png|jpe?g)$/i,"-228x228.$1")}
@@ -3487,10 +3487,11 @@ if(st===200){toast("Спасибо! Ваш отзыв опубликован");f
 else if(st===429)toast("Отзыв об этом товаре уже отправлен. Спасибо!");
 else tg()});
 function enter(){pimg.n=0;const c=$("#cpbody");c.classList.remove("enter");void c.offsetWidth;c.classList.add("enter")}
-function route(){const pm=location.hash.match(/^#\/p\/(\d+)$/);if(pm&&PRODUCTS[+pm[1]]){drawProduct(+pm[1]);enter();document.body.classList.add("cpg");scrollTo({top:0,behavior:"instant"});return}
+let LASTH="";const SCR={};
+function route(){const prev=LASTH;if(prev)SCR[prev]=scrollY;LASTH=location.hash;const pm=location.hash.match(/^#\/p\/(\d+)$/);if(pm&&PRODUCTS[+pm[1]]){drawProduct(+pm[1]);enter();document.body.classList.add("cpg");scrollTo({top:0,behavior:"instant"});return}
 const m=location.hash.match(/^#\/c\/(\d+)(?:\/(\d+))?(?:\/(\d+))?$/);
 if(m){const i=+m[1],j=m[2]!=null?+m[2]:null,k=m[3]!=null?+m[3]:null;
-if(MENU[i]&&(j==null||MENU[i][1][j])&&(k==null||MENU[i][1][j][1][k])){drawPage(i,j,k);enter();document.body.classList.add("cpg");scrollTo({top:0,behavior:"instant"});return}}
+if(MENU[i]&&(j==null||MENU[i][1][j])&&(k==null||MENU[i][1][j][1][k])){drawPage(i,j,k);enter();document.body.classList.add("cpg");const rs=prev.startsWith("#/p/")?SCR[location.hash]:null;scrollTo({top:rs||0,behavior:"instant"});return}}
 const was=document.body.classList.contains("cpg");document.body.classList.remove("cpg");document.title="Все Для Дома — Vamzid GRUP";
 if(was){const id=decodeURIComponent(location.hash.slice(1)),el=id&&document.getElementById(id);setTimeout(()=>el?el.scrollIntoView():scrollTo({top:0,behavior:"instant"}),0)}}
 addEventListener("hashchange",route);
