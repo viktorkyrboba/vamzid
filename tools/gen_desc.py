@@ -232,6 +232,41 @@ def kw_text(n):
         if k in l:
             return t
     return None
+import re as _re
+def extra(p):
+    n, x = p["n"], p["x"]; l = n.lower(); e = []
+    if x == "Керамическая плитка":
+        m = _re.match(r"([A-Za-zА-Яа-яЁё.\- ]+?)\s+(?=[\dA-Z]*\d|ELE\b|ЕLE\b|1[СCсc]\b)", n)
+        coll = m.group(1).strip() if m else ""
+        if 3 <= len(coll) <= 30 and not _re.search(r"\d", coll): e.append("Название коллекции: " + coll.title())
+        m = _re.search(r"(болгар|польш|украин|турц|испан|итал|румын|китай|греци)[а-я]*", l)
+        if m:
+            e.append("Страна по названию: " + {"болгар":"Болгария","польш":"Польша","украин":"Украина","турц":"Турция","испан":"Испания","итал":"Италия","румын":"Румыния","китай":"Китай","греци":"Греция"}[m.group(1)])
+        if _re.search(r"1\s*[сc]\b", l): e.append("Сорт по названию: 1")
+    elif x == "Обои":
+        m = _re.match(r"обои\s+(.+)", n, _re.I)
+        if m and _re.search(r"\d", m.group(1)): e.append("Артикул/название: " + m.group(1).strip())
+    elif x == "Валики":
+        m = _re.search(r"(\d{2,3})\s*(?:х|x|×|\*)\s*(\d{2,3})\s*мм", l)
+        if m: e.append("Размер по названию: %s × %s мм" % (m.group(1), m.group(2)))
+        else:
+            m = _re.search(r"(\d{1,2})\s*см", l)
+            if m: e.append("Ширина по названию: %s см" % m.group(1))
+        for b in ("Hardex", "Hardy", "Bau Welt", "Bautex"):
+            if b.lower() in l: e.append("Бренд по названию: " + b); break
+        m = _re.search(r"(?:арт\.?\s*)?(\d{4,5}-\d{5,6})", l)
+        if m: e.append("Артикул: " + m.group(1))
+    elif x == "Межкомнатные двери":
+        if "alb" in l: e.append("Цвет по названию: белый")
+        elif "stejar" in l: e.append("Цвет по названию: дуб (Stejar)")
+        if _re.search(r"короб", l):
+            e.append("Комплектация по названию: коробка" + (", наличники" if "нал" in l else "") + (", замок" if "замок" in l else ""))
+    elif x == "Мебель для ванной":
+        m = _re.search(r"(\d{3})\b", n)
+        if "bayro" in l: e.append("Производитель по названию: BAYRO")
+        if m: e.append("Типоразмер по названию: " + m.group(1))
+    return e
+
 DEFAULT_FB = "Товар хорошего качества для дома и повседневного использования. Практичный и удобный. Подробности и наличие уточняйте у продавца."
 
 out = {}
@@ -241,6 +276,9 @@ for p in P:
         CUR["n"] = p["n"]; v = vol(p["n"]); c = color(p["n"])
         sp = [("Фасовка: " + v) if v else "", ("Цвет по названию: " + c) if c else ""]
         r = D(p["n"] + ". " + (kw_text(p["n"]) or FB.get(p["x"], DEFAULT_FB)), *sp)
+    ex = extra(p)
+    if ex:
+        r = [r[0], "; ".join(x for x in [r[1]] + ex if x)] + r[2:]
     out[p["c"]] = r
 json.dump(out, open("tools/desc_generated.json", "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
 print(len(out), "из", len(P))
