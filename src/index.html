@@ -190,20 +190,17 @@ body:not(.cpg) #cpage{display:none}
 /* ===== лёгкие анимации (отключаются при prefers-reduced-motion) ===== */
 @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 #cpbody.enter{animation:rise .25s ease-out}
-.pgrid .pcard{animation:rise .3s ease-out both}
-.pgrid .pcard:nth-child(2){animation-delay:.025s}.pgrid .pcard:nth-child(3){animation-delay:.05s}.pgrid .pcard:nth-child(4){animation-delay:.075s}.pgrid .pcard:nth-child(5){animation-delay:.1s}.pgrid .pcard:nth-child(6){animation-delay:.125s}.pgrid .pcard:nth-child(7){animation-delay:.15s}.pgrid .pcard:nth-child(8){animation-delay:.175s}
 .pcard{transition:transform .25s ease,box-shadow .25s ease}
-.pimg img{transition:transform .5s ease}
-@media(hover:hover){.pcard:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(40,25,10,.09)}.pcard:hover .pimg img{transform:scale(1.02)}}
+@media(hover:hover){.pcard:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(40,25,10,.09)}}
 .chips a{transition:background-color .18s,color .18s,border-color .18s,transform .12s}
 .chips a:active{transform:scale(.97)}
 .crumbs a,.back{transition:color .15s}
-.prod-img,.prod-main>*{animation:rise .3s ease-out both}
+.prod-main>*{animation:rise .3s ease-out both}
 .prod-main>*:nth-child(2){animation-delay:.05s}.prod-main>*:nth-child(3){animation-delay:.1s}.prod-main>*:nth-child(4){animation-delay:.15s}.prod-main>*:nth-child(5){animation-delay:.2s}.prod-main>*:nth-child(6){animation-delay:.25s}
 .btn.added{background:#2e9d5b;color:#fff;transition:background-color .2s}
 .specs{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:0;border-top:1px solid var(--line)}.specs li{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.95rem}.specs span{color:var(--mute)}.specs b{font-weight:600;text-align:right;overflow-wrap:anywhere}.prod-src{font-size:.8rem;color:var(--mute);margin:-6px 0 12px}.prod-note{font-size:.9rem}
 .more .btn{transition:transform .12s,background-color .2s}
-@media (prefers-reduced-motion:reduce){#cpbody.enter,.pgrid .pcard,.prod-img,.prod-main>*{animation:none}.pcard,.pimg img,.chips a{transition:none}.pcard:hover,.pcard:hover .pimg img{transform:none}}
+@media (prefers-reduced-motion:reduce){#cpbody.enter,.prod-main>*{animation:none}.pcard,.chips a{transition:none}.pcard:hover{transform:none}}
 
 .more{text-align:center;margin:22px 0 4px}.more p{margin:0 0 10px;color:var(--mute);font-size:.95rem}
 .crumbs a:hover{color:var(--brand-d)}
@@ -218,7 +215,7 @@ body:not(.cpg) #cpage{display:none}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
 .pcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
 .pimg{aspect-ratio:1/1;background:#fff;display:grid;place-items:center;font-size:40px;position:relative;overflow:hidden;flex:none}
-.pimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.pimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:10px;box-sizing:border-box;mix-blend-mode:multiply}
 .pin{padding:12px 14px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
 .pin>a b{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;overflow-wrap:anywhere}
 .pin .pprice{margin-top:auto;padding-top:4px}
@@ -241,7 +238,7 @@ body:not(.cpg) #cpage{display:none}
 @media(max-width:700px){.trust{grid-template-columns:1fr}.pinfo{grid-template-columns:1fr}.rsum{grid-template-columns:1fr;gap:12px}}
 .pcl{color:inherit;text-decoration:none;display:block;padding:0}.pcl:hover b{color:var(--brand-d)}
 .prod{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;align-items:start}
-.prod-img{aspect-ratio:1/1;background:#fff;border-radius:12px;display:grid;place-items:center;font-size:64px;overflow:hidden;position:relative}.prod-img img{position:absolute;inset:0;margin:auto;width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain}
+.prod-img{aspect-ratio:1/1;background:#fff;border:1px solid var(--line);border-radius:14px;display:grid;place-items:center;font-size:64px;overflow:hidden;position:relative}.prod-img img{position:absolute;inset:0;margin:auto;width:auto;height:auto;max-width:calc(100% - 28px);max-height:calc(100% - 28px);object-fit:contain;mix-blend-mode:multiply}
 .prod-main,.prod-img{min-width:0}.prod-main h2{margin:0 0 8px;overflow-wrap:anywhere}.prod-code{margin:0 0 10px;color:var(--mute);font-size:.9rem}.prod-d{color:var(--mute);margin:0 0 14px}.prod-price{font-size:2rem;font-weight:800;color:var(--brand-d);margin:0 0 16px}
 .prod-main .row{display:flex;flex-wrap:wrap;gap:10px}
 .pinfo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
@@ -3440,7 +3437,8 @@ function thumbOf(u){return u.replace("/image/catalog/","/image/cache/catalog/").
 function pimg(p,big){const l=[];if(p.img2&&IMGOK.test(p.img2)){if(big)l.push(p.img2,thumbOf(p.img2));else l.push(thumbOf(p.img2),p.img2)}if(p.img&&IMGOK.test(p.img))l.push(p.img);
 if(!l.length)return '<span aria-hidden="true">📦</span>';
 const sr=!big&&p.img2?` srcset="${esc(thumbOf(p.img2))} 228w, ${esc(p.img2)} 700w" sizes="(max-width:600px) 46vw,220px"`:"";
-return `<img src="${esc(l[0])}"${sr} data-fb="${esc(l.slice(1).join(" "))}" alt="${esc(p.n)}" loading="lazy" decoding="async">`}
+return `<img src="${esc(l[0])}"${sr} data-fb="${esc(l.slice(1).join(" "))}" alt="${esc(p.n)}"${big||pimg.n++<12?"":' loading="lazy"'} decoding="async">`}
+pimg.n=0;
 document.addEventListener("error",e=>{const i=e.target;if(!i||i.tagName!=="IMG"||i.dataset.fb===undefined)return;const l=i.dataset.fb.split(" ").filter(Boolean);if(!l.length){const q=document.createElement("span");q.setAttribute("aria-hidden","true");q.textContent="📦";i.replaceWith(q);return}i.removeAttribute("srcset");i.dataset.fb=l.slice(1).join(" ");i.src=l[0]},true);
 function starsEl(v){return `<span class="stars" role="img" aria-label="Оценка ${v} из 5"><span class="sb">★★★★★</span><span class="sf" style="width:${Math.max(0,Math.min(5,v))*20}%">★★★★★</span></span>`}
 const pkey=p=>p.id||p.n;
@@ -3488,7 +3486,7 @@ btn.disabled=false;
 if(st===200){toast("Спасибо! Ваш отзыв опубликован");f.reset();f.dataset.v="";f.querySelectorAll(".st").forEach(b=>{b.classList.remove("on");b.setAttribute("aria-checked","false")});const p=PRODUCTS.find(x=>pkey(x)===f.dataset.rf);if(p)loadRev(p)}
 else if(st===429)toast("Отзыв об этом товаре уже отправлен. Спасибо!");
 else tg()});
-function enter(){const c=$("#cpbody");c.classList.remove("enter");void c.offsetWidth;c.classList.add("enter")}
+function enter(){pimg.n=0;const c=$("#cpbody");c.classList.remove("enter");void c.offsetWidth;c.classList.add("enter")}
 function route(){const pm=location.hash.match(/^#\/p\/(\d+)$/);if(pm&&PRODUCTS[+pm[1]]){drawProduct(+pm[1]);enter();document.body.classList.add("cpg");scrollTo({top:0,behavior:"instant"});return}
 const m=location.hash.match(/^#\/c\/(\d+)(?:\/(\d+))?(?:\/(\d+))?$/);
 if(m){const i=+m[1],j=m[2]!=null?+m[2]:null,k=m[3]!=null?+m[3]:null;
