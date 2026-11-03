@@ -34,7 +34,7 @@ header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px s
 .logo small{display:block;font-weight:500;font-size:12px;color:var(--mute)}
 nav{display:flex;gap:2px;margin-left:8px}
 nav a{padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:500}
-nav a:hover{background:var(--ph)}
+nav a:hover{background:var(--ph)}nav a.navcall{display:none}
 .search{flex:1;min-width:0;display:flex;max-width:340px;margin-left:auto}
 .search input{width:100%;padding:10px 14px;border:1px solid var(--line);border-right:0;border-radius:10px 0 0 10px;background:var(--surface);color:var(--ink);font:inherit}
 .btn,.search button{font:inherit;font-weight:700;border:0;cursor:pointer;text-decoration:none;display:inline-block}
@@ -42,7 +42,7 @@ nav a:hover{background:var(--ph)}
 .btn{background:var(--brand);color:#1d1a17;padding:12px 22px;border-radius:10px;text-align:center}
 .btn:hover{background:var(--brand-d);color:#fff}
 .btn.alt{background:transparent;color:inherit;border:2px solid currentColor;padding:10px 20px}
-.menu{display:none;background:none;border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--ink);font:inherit}
+.menu .bars,.menu .bars::before,.menu .bars::after{display:block;width:20px;height:2px;border-radius:2px;background:currentColor;transition:transform .26s cubic-bezier(.2,.8,.2,1),background .2s}.menu .bars{position:relative;margin:auto}.menu .bars::before,.menu .bars::after{content:"";position:absolute;left:0}.menu .bars::before{top:-6px}.menu .bars::after{top:6px}.menu[aria-expanded="true"] .bars{background:transparent}.menu[aria-expanded="true"] .bars::before{transform:translateY(6px) rotate(45deg)}.menu[aria-expanded="true"] .bars::after{transform:translateY(-6px) rotate(-45deg)}.menu{display:none;background:none;border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--ink);font:inherit}
 .hero{background:radial-gradient(circle at 85% 20%,#5a4a3e 0,var(--dark) 62%);color:var(--on-dark);overflow:hidden}
 .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-top:56px;padding-bottom:56px}
 h1{font-size:clamp(34px,5.2vw,62px);line-height:1.04;margin:0 0 18px;font-weight:800;letter-spacing:-.02em}
@@ -69,8 +69,13 @@ footer .cols{grid-template-columns:2fr 1fr 1fr}
 footer a{display:block;text-decoration:none;color:#d9cdbf;padding:3px 0}
 footer a:hover{color:#fff}
 footer p{color:#b3a89b;margin:6px 0}
-@media (max-width:860px){nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg);flex-direction:column;padding:10px 20px;border-bottom:1px solid var(--line)}
-nav.open{display:flex}
+@media (max-width:860px){nav{display:flex;position:absolute;top:calc(100% + 8px);left:12px;right:12px;margin:0;background:var(--surface);flex-direction:column;gap:2px;padding:8px;border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 40px rgba(20,12,6,.28);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-10px) scale(.98);transform-origin:top right;transition:opacity .22s ease,transform .26s cubic-bezier(.2,.8,.2,1),visibility 0s linear .26s}
+nav.open{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition-delay:0s}
+nav a{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 16px;border-radius:12px;font-size:1.08rem;font-weight:600}
+nav a::after{content:"›";color:var(--mute);font-size:1.4rem;font-weight:400}
+nav a:active{background:var(--ph)}
+nav a.navcall{display:flex;margin-top:6px;justify-content:center;background:var(--brand);color:#1d1a17;font-weight:800}
+nav a.navcall::after{content:none}
 .menu{display:block}
 .hero .wrap,.cols,footer .cols{grid-template-columns:1fr}
 .hero .wrap{padding-top:36px;padding-bottom:44px;gap:30px}
@@ -84,7 +89,7 @@ section{padding:44px 0}}
 h1{font-size:34px}
 .hero p{font-size:16px}
 .phones a{flex-direction:column;gap:2px}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}nav,.menu .bars,.menu .bars::before,.menu .bars::after{transition:none!important}}
 .hero{background:linear-gradient(90deg,rgba(40,37,34,.88),rgba(40,37,34,.62)),var(--p1) center/cover}
 .pbg{background:linear-gradient(color-mix(in srgb,var(--bg) 82%,transparent),color-mix(in srgb,var(--bg) 88%,transparent)),var(--img) center/cover}
 .strip{min-height:230px;display:grid;align-items:end;text-align:center;color:#fff;padding:60px 20px 22px;background:linear-gradient(rgba(40,37,34,.4) 0%,rgba(40,37,34,.88)),var(--mos) center/auto 100% repeat-x,#3a3532}
@@ -502,11 +507,11 @@ em.mk::after{content:"";position:absolute;left:-.04em;right:-.06em;bottom:-.16em
 
 <header><div class="wrap bar">
 <a class="logo" href="#top" aria-label="Все Для Дома"><i><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#lg"/></svg></i><span>Все Для Дома<small>Vamzid GRUP</small></span></a>
-<nav id="nav" aria-label="Основное меню"><a href="#catalog">Каталог</a><a href="#video">Фото</a><a href="#contacts">Контакты</a></nav>
+<nav id="nav" aria-label="Основное меню"><a href="#catalog">Каталог</a><a href="#video">Фото</a><a href="#contacts">Контакты</a><a class="navcall" href="tel:+37329123914">Позвонить: (0291) 2-39-14</a></nav>
 <form class="search" role="search" id="sf"><input id="q" type="search" placeholder="Поиск" aria-label="Поиск"><button type="submit">Найти</button></form>
 <div class="tools2"><button class="ibtn" id="cartb" aria-label="Корзина" hidden><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg><span class="cnt" id="cnt">0</span></button></div>
 <a class="btn hdr-btn" href="tel:+37329123914">Позвонить</a>
-<button class="menu" id="mb" aria-label="Меню" aria-expanded="false" aria-controls="nav">☰</button>
+<button class="menu" id="mb" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span class="bars" aria-hidden="true"></span></button>
 </div></header>
 
 <noscript><p style="margin:0;padding:12px 20px;background:#ff6a00;color:#1d1a17;font-weight:700;text-align:center">Для работы каталога и корзины включите JavaScript. Позвонить в магазин: (0291) 2-39-14.</p></noscript>
@@ -3336,7 +3341,10 @@ const tot=ph.length+hits.length;
 f.hidden=false;f.innerHTML=tot?`<b>Найдено: ${tot}</b>${ph.length?`<div class="res">${ph.slice(0,30).map(h=>`<button data-pp="${h[1]}">${esc(h[0])}</button>`).join("")}</div>${ph.length>30?`<p class="prod-d">Показаны первые 30 товаров — уточните запрос.</p>`:""}`:""}${hits.length?`<div class="res">${hits.slice(0,30).map(h=>`<button data-p="${h[1]}">${esc(h[0])}</button>`).join("")}</div>`:""}`:`<b>Ничего не найдено.</b> Позвоните нам — подскажем, есть ли товар.`}
 document.querySelectorAll("form[role=search]").forEach(f=>{const q=f.querySelector("input");f.addEventListener("submit",e=>{e.preventDefault();if(document.body.classList.contains("cpg"))location.hash="#catalog";find(q.value);$("#catalog").scrollIntoView()});q.addEventListener("input",()=>{if(!q.value)find("")})});
 $("#mb").addEventListener("click",()=>{const o=$("#nav").classList.toggle("open");$("#mb").setAttribute("aria-expanded",o)});
-$("#nav").addEventListener("click",()=>{$("#nav").classList.remove("open");$("#mb").setAttribute("aria-expanded","false")});
+const closeNav=()=>{$("#nav").classList.remove("open");$("#mb").setAttribute("aria-expanded","false")};
+$("#nav").addEventListener("click",closeNav);
+document.addEventListener("click",e=>{if($("#nav").classList.contains("open")&&!e.target.closest("#nav,#mb"))closeNav()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&$("#nav").classList.contains("open")){closeNav();$("#mb").focus()}});
 /* ===== КОРЗИНА И ЗАКАЗ =====
    Корзина хранится только в браузере (localStorage, без персональных данных).
    Имя, телефон и адрес из формы заказа нигде на устройстве не сохраняются: они уходят только в заказ.
