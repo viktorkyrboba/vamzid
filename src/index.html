@@ -215,7 +215,7 @@ body:not(.cpg) #cpage{display:none}
 .pick{display:flex;gap:4px}.st{font-size:34px;line-height:1;background:none;border:0;color:#cfcac3;cursor:pointer;padding:2px 4px;min-width:44px;min-height:44px}.st.on{color:#f5a400}.st:focus-visible{outline:3px solid var(--brand);border-radius:8px}
 .rform label{display:grid;gap:6px;font-weight:600}.rform textarea{font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:inherit;resize:vertical}
 @media(max-width:700px){.trust{grid-template-columns:1fr}.pinfo{grid-template-columns:1fr}.rsum{grid-template-columns:1fr;gap:12px}}
-.plink{color:inherit;text-decoration:none;display:block}.plink:hover b{color:var(--brand-d)}
+.pcl{color:inherit;text-decoration:none;display:block;padding:0}.pcl:hover b{color:var(--brand-d)}
 .prod{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;align-items:start}
 .prod-img{aspect-ratio:1/1;background:#fff;border-radius:12px;display:grid;place-items:center;font-size:64px;overflow:hidden}.prod-img img{width:100%;height:100%;object-fit:contain}
 .prod-main h2{margin:0 0 8px}.prod-d{color:var(--mute);margin:0 0 14px}.prod-price{font-size:2rem;font-weight:800;color:var(--brand-d);margin:0 0 16px}
@@ -688,7 +688,7 @@ let nav="";
 if(g){nav='<div class="chips">'+g[1].map((y,kk)=>`<a href="#/c/${i}/${j}/${kk}"${kk===k?' aria-current="page"':""}>${esc(y)}</a>`).join("")+"</div>"}
 else{nav=r[1].map((gg,jj)=>`<div class="cgroup"><h3><a href="#/c/${i}/${jj}">${esc(gg[0])}</a></h3><div class="chips">`+gg[1].map((y,kk)=>`<a href="#/c/${i}/${jj}/${kk}">${esc(y)}</a>`).join("")+"</div></div>").join("")}
 const list=PRODUCTS.filter(p=>p.r===r[0]&&(!g||p.g===g[0])&&(!x||p.x===x));
-const body=list.length?'<div class="pgrid">'+list.map(p=>`<article class="pcard"><a class="plink" href="#/p/${PRODUCTS.indexOf(p)}" aria-label="${esc(p.n)}: подробнее"><div class="pimg">${pimg(p)}</div></a><div class="pin"><a class="plink" href="#/p/${PRODUCTS.indexOf(p)}"><b>${esc(p.n)}</b></a>${p.d?`<small>${esc(p.d)}</small>`:""}${typeof p.p==="number"?`<b class="pprice">${esc(money(p.p))}</b>`:""}<button class="btn" data-add="${PRODUCTS.indexOf(p)}">В корзину</button></div></article>`).join("")+"</div>"
+const body=list.length?'<div class="pgrid">'+list.map(p=>`<article class="pcard"><a class="pcl" href="#/p/${PRODUCTS.indexOf(p)}" aria-label="${esc(p.n)}: подробнее"><div class="pimg">${pimg(p)}</div></a><div class="pin"><a class="pcl" href="#/p/${PRODUCTS.indexOf(p)}"><b>${esc(p.n)}</b></a>${p.d?`<small>${esc(p.d)}</small>`:""}${typeof p.p==="number"?`<b class="pprice">${esc(money(p.p))}</b>`:""}<button class="btn" data-add="${PRODUCTS.indexOf(p)}">В корзину</button></div></article>`).join("")+"</div>"
 :`<div class="cempty"><p><b>Товары этого раздела скоро появятся на сайте.</b><br>А пока уточните наличие и цену у магазина — ответим быстро.</p><div class="row"><button class="btn" data-tgask="${esc(title)}|${esc(r[0])}">Спросить в Telegram</button><a class="btn alt" href="tel:+37329123914">Позвонить</a></div></div>`;
 $("#cpbody").innerHTML=`<nav class="crumbs" aria-label="Путь">${cr}</nav><h2>${esc(title)}</h2>${nav}${body}<p style="margin-top:22px"><a class="back" href="#catalog">← Вернуться в каталог</a></p>`;
 document.title=title+" — Все Для Дома";const h=$("#cpbody h2");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}}
