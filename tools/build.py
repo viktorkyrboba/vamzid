@@ -28,7 +28,7 @@ def order_origin():
 
 def csp(script_src):
     return ("<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; "
-            f"script-src {script_src}; style-src 'unsafe-inline'; img-src 'self' data:; "
+            f"script-src {script_src}; style-src 'unsafe-inline'; img-src 'self' data: https://vamzid.md; "
             f"connect-src {order_origin()}; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; "
             "manifest-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'\">")
 
