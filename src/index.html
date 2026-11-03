@@ -212,7 +212,7 @@ body:not(.cpg) #cpage{display:none}
 .rform input[name=a]{font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:inherit}.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}.rvi small{color:var(--mute);margin-left:6px}
 .rvl{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:10px}.rvi{border-top:1px solid var(--line);padding-top:10px}.rvi p{margin:6px 0 0}
 .rform{border-top:1px solid var(--line);padding-top:14px;display:grid;gap:10px;max-width:520px}.rform fieldset{border:0;padding:0;margin:0}.rform legend{font-weight:700;padding:0;margin-bottom:6px}
-.pick{display:flex;gap:4px}.st{font-size:34px;line-height:1;background:none;border:0;color:#cfcac3;cursor:pointer;padding:2px 4px;min-width:44px;min-height:44px}.st.on{color:#f5a400}.st:focus-visible{outline:3px solid var(--brand);border-radius:8px}
+.spick{display:flex;gap:4px}.st{font-size:34px;line-height:1;background:none;border:0;color:#cfcac3;cursor:pointer;padding:2px 4px;min-width:44px;min-height:44px}.st.on{color:#f5a400}.st:focus-visible{outline:3px solid var(--brand);border-radius:8px}
 .rform label{display:grid;gap:6px;font-weight:600}.rform textarea{font:inherit;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:inherit;resize:vertical}
 @media(max-width:700px){.trust{grid-template-columns:1fr}.pinfo{grid-template-columns:1fr}.rsum{grid-template-columns:1fr;gap:12px}}
 .pcl{color:inherit;text-decoration:none;display:block;padding:0}.pcl:hover b{color:var(--brand-d)}
@@ -704,7 +704,7 @@ function showRev(l,state){const a=$("#rsl"),t=$("#rtop");if(a)a.innerHTML=sumHtm
 async function loadRev(p){showRev([],"load");if(!ORDER_ENDPOINT){showRev([]);return}
 try{const r=await fetch(ORDER_ENDPOINT+"reviews?p="+encodeURIComponent(pkey(p)),{cache:"no-store"});const d=await r.json();showRev(d&&d.ok&&Array.isArray(d.reviews)?d.reviews:[])}catch(e){showRev([])}}
 function reviewsHtml(p){return `<section class="prev" id="revs"><h3>Отзывы и оценки</h3><div id="rsl">${sumHtml([],"load")}</div>
-<form class="rform" data-rf="${esc(pkey(p))}" data-rn="${esc(p.n)}" novalidate><fieldset><legend>Ваша оценка</legend><div class="pick" role="radiogroup" aria-label="Оценка">${[1,2,3,4,5].map(k=>`<button type="button" class="st" role="radio" aria-checked="false" aria-label="${k} из 5" data-star="${k}">★</button>`).join("")}</div></fieldset>
+<form class="rform" data-rf="${esc(pkey(p))}" data-rn="${esc(p.n)}" novalidate><fieldset><legend>Ваша оценка</legend><div class="spick" role="radiogroup" aria-label="Оценка">${[1,2,3,4,5].map(k=>`<button type="button" class="st" role="radio" aria-checked="false" aria-label="${k} из 5" data-star="${k}">★</button>`).join("")}</div></fieldset>
 <label>Имя (необязательно)<input name="a" maxlength="40" autocomplete="off" placeholder="Как вас подписать"></label>
 <label>Отзыв (необязательно)<textarea name="t" maxlength="500" rows="3" placeholder="Что понравилось, что нет"></textarea></label>
 <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
