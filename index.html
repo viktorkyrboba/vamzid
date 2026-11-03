@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <script>document.documentElement.className+=" js"</script>
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-pfgOMgfVZwm2ODyms34QYW9h8EwicylhV77q5LHK8c0=' 'sha256-H1NLORhxmqzSE0zTgCifDyZpBlvilYurgl4tcefxOcw='; style-src 'unsafe-inline'; img-src 'self' data: https://vamzid.md; connect-src 'self' https://vdd-orders.victorcirboba.workers.dev; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-pfgOMgfVZwm2ODyms34QYW9h8EwicylhV77q5LHK8c0=' 'sha256-Kh0tjSGUArgIg+/7dG79aoX6IdJCldAYfz6fH7Cr200='; style-src 'unsafe-inline'; img-src 'self' data: https://vamzid.md; connect-src 'self' https://vdd-orders.victorcirboba.workers.dev; media-src 'none'; frame-src 'none'; font-src 'none'; object-src 'none'; manifest-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <link rel="preconnect" href="https://vamzid.md">
 <meta name="description" content="Все Для Дома (Vamzid GRUP) — товары для дома и ремонта в Ceadîr-Lunga: обогреватели, освещение, электрика, краски, посуда, сад и многое другое.">
@@ -490,7 +490,7 @@ em.mk::after{content:"";position:absolute;left:-.04em;right:-.06em;bottom:-.16em
 /* фоновые фото ниже первого экрана грузятся, когда до них почти долистали */
 .js .lzs:not(.lzin){--p1:none;--p2:none;--p3:none;--p4:none;--p5:none;--p6:none;--p7:none;--mos:none}
 .ibtn,.menu{min-height:44px}.menu{min-width:44px}.logo{min-height:44px}
-.gdots button{position:relative}
+.gdots button{position:relative}.gdots button::after{content:"";position:absolute;inset:-18px -3px}
 .gdots button::before{content:"";position:absolute;inset:-14px -6px}
 
 </style>
@@ -3473,7 +3473,7 @@ const back=xi>=0?`#/c/${ri}/${gi}/${xi}`:"#catalog";
 $("#cpbody").innerHTML=`<nav class="crumbs" aria-label="Путь">${cr}<span aria-hidden="true">›</span><span>${esc(p.n)}</span></nav>
 <article class="prod"><div class="prod-img">${pimg(p,true)}</div><div class="prod-main"><h2>${esc(p.n)}</h2>${p.code?`<p class="prod-code">Код товара: ${esc(p.code)}</p>`:""}${p.d?`<p class="prod-d">${esc(p.d)}</p>`:'<div id="pdesc"></div>'}<p class="rtop" id="rtop"></p>${typeof p.p==="number"?`<p class="prod-price">${esc(money(p.p))}</p>`:'<p class="prod-d">Цену уточняйте у магазина.</p>'}
 <div class="row"><button class="btn" data-add="${id}">В корзину</button><a class="btn alt" href="tel:+37329123914">Позвонить: (0291) 2-39-14</a></div></div></article>
-<ul class="trust" aria-label="Преимущества"><li><i aria-hidden="true">✔</i><b>100% оригинальные товары</b><span>Только фирменная продукция</span></li><li><i aria-hidden="true">🛡</i><b>Гарантия качества</b><span>Права покупателя защищены законом о защите прав потребителей</span></li><li><i aria-hidden="true">🕒</i><b>Заказ 24/7</b><span>Оформляйте заказ на сайте в любое время — мы свяжемся с вами</span></li></ul>
+<ul class="trust" aria-label="Преимущества"><li><i aria-hidden="true">📍</i><b>Самовывоз из магазина</b><span>Ломоносова 16, Чадыр-Лунга</span></li><li><i aria-hidden="true">☎</i><b>Наличие по телефону</b><span>Уточните наличие и подробности: (0291) 2-39-14</span></li><li><i aria-hidden="true">🕒</i><b>Заказ 24/7</b><span>Оформляйте заказ на сайте в любое время — мы свяжемся с вами</span></li></ul>
 <div class="pinfo"><section><h3>🚚 Получение</h3><ul><li>Самовывоз из магазина: Ломоносова 16, Чадыр-Лунга</li><li>Доставка — выберите при оформлении заказа; стоимость и сроки уточнит магазин по телефону</li></ul></section>
 <section><h3>💳 Оплата</h3><ul><li>Наличными при получении</li><li>Картой при получении</li></ul></section></div>
 ${reviewsHtml(p)}
