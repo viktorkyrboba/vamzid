@@ -215,6 +215,7 @@ body:not(.cpg) #cpage{display:none}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
 .pcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
 .pimg{aspect-ratio:1/1;background:#fff;display:grid;place-items:center;font-size:40px;position:relative;overflow:hidden;flex:none}
+.pimg img:not(.ok),.prod-img img:not(.ok){opacity:0}
 .pimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:10px;box-sizing:border-box;mix-blend-mode:multiply}
 .pin{padding:12px 14px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
 .pin>a b{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;overflow-wrap:anywhere}
@@ -3440,6 +3441,7 @@ if(!l.length)return '<span aria-hidden="true">📦</span>';
 const sr=!big&&p.img2?` srcset="${esc(thumbOf(p.img2))} 228w, ${esc(p.img2)} 700w" sizes="(max-width:600px) 46vw,220px"`:"";
 return `<img src="${esc(l[0])}"${sr} data-fb="${esc(l.slice(1).join(" "))}" alt="${esc(p.n)}"${big||pimg.n++<12?"":' loading="lazy"'} decoding="async">`}
 pimg.n=0;
+document.addEventListener("load",e=>{const i=e.target;if(i&&i.tagName==="IMG")i.classList.add("ok")},true);
 document.addEventListener("error",e=>{const i=e.target;if(!i||i.tagName!=="IMG"||i.dataset.fb===undefined)return;const l=i.dataset.fb.split(" ").filter(Boolean);if(!l.length){const q=document.createElement("span");q.setAttribute("aria-hidden","true");q.textContent="📦";i.replaceWith(q);return}i.removeAttribute("srcset");i.dataset.fb=l.slice(1).join(" ");i.src=l[0]},true);
 function starsEl(v){return `<span class="stars" role="img" aria-label="Оценка ${v} из 5"><span class="sb">★★★★★</span><span class="sf" style="width:${Math.max(0,Math.min(5,v))*20}%">★★★★★</span></span>`}
 const pkey=p=>p.id||p.n;
