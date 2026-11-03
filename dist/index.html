@@ -199,9 +199,13 @@ body:not(.cpg) #cpage{display:none}
 .cgroup .chips{margin:10px 0 6px}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
 .pcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
-.pimg{aspect-ratio:1/1;background:#fff;display:grid;place-items:center;font-size:40px}
-.pimg img{width:100%;height:100%;object-fit:contain}
-.pin{padding:12px 14px 16px;display:grid;gap:6px;flex:1}
+.pimg{aspect-ratio:1/1;background:#fff;display:grid;place-items:center;font-size:40px;position:relative;overflow:hidden;flex:none}
+.pimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.pin{padding:12px 14px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pin>a b{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;overflow-wrap:anywhere}
+.pin .pprice{margin-top:auto;padding-top:4px}
+.pin .pprice+.btn{margin-top:4px}
+.pin>a+.btn,.pin small+.btn{margin-top:auto}
 .pin small{color:var(--mute)}
 .trust{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .trust li{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:44px 1fr;column-gap:12px;align-items:center}
@@ -227,7 +231,7 @@ body:not(.cpg) #cpage{display:none}
 .pinfo h3,.prev h3{margin:0 0 8px;font-size:1.05rem}.pinfo ul{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--mute)}.prev{margin-top:16px}
 @media(max-width:700px){.prod{grid-template-columns:1fr;padding:14px;gap:16px}.pinfo{grid-template-columns:1fr}.prod-price{font-size:1.7rem}}
 @media(max-width:600px){.pgrid{grid-template-columns:1fr 1fr;gap:10px}.pin{padding:10px 10px 12px}.pin b{font-size:.9rem;line-height:1.25}.pin small{font-size:.78rem}.pin .btn{padding:9px 6px;font-size:.88rem}}
-.pin .btn{margin-top:auto;padding:10px}
+.pin .btn{margin-top:4px;padding:10px}
 .cempty{border:2px dashed var(--line);border-radius:16px;padding:28px 20px;text-align:center;background:var(--surface)}
 .cempty p{margin:0 0 18px;color:var(--mute)}
 .cempty b{color:var(--ink)}
