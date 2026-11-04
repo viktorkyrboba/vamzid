@@ -19,7 +19,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <style>
 :root{--bg:#fbf8f4;--surface:#fff;--ink:#1d1a17;--mute:#6a625a;--line:#e6ded4;--brand:#ff6a00;--brand-d:#c24e00;--dark:#3a3532;--on-dark:#f6efe6;--ph:#f1e8dd;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#423d39;--surface:#4d4743;--ink:#fffaf2;--mute:#ddd5cc;--line:#635c56;--ph:#58514c;--brand:#ff7a1a;--brand-d:#ff9a4d}}
+@media not all{:root:not([data-theme="light"]){--bg:#423d39;--surface:#4d4743;--ink:#fffaf2;--mute:#ddd5cc;--line:#635c56;--ph:#58514c;--brand:#ff7a1a;--brand-d:#ff9a4d}}
 :root[data-theme="dark"]{--bg:#423d39;--surface:#4d4743;--ink:#fffaf2;--mute:#ddd5cc;--line:#635c56;--ph:#58514c;--brand:#ff7a1a;--brand-d:#ff9a4d}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
@@ -426,7 +426,7 @@ em.mk::after{content:"";position:absolute;left:-.04em;right:-.06em;bottom:-.16em
 #mega>ul>li+li{border-top:1px solid color-mix(in srgb,var(--line) 60%,transparent)}
 @media (max-width:860px){#mega .rub{padding:10px 12px}
 #mega .rub svg{width:20px;height:20px;padding:6px}}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #catalog.pbg{background:radial-gradient(60% 55% at 100% 0%,rgba(255,106,0,.06),transparent 70%),linear-gradient(rgba(40,37,34,.62),rgba(40,37,34,.78)),var(--p6) center/cover}
+@media not all{:root:not([data-theme="light"]) #catalog.pbg{background:radial-gradient(60% 55% at 100% 0%,rgba(255,106,0,.06),transparent 70%),linear-gradient(rgba(40,37,34,.62),rgba(40,37,34,.78)),var(--p6) center/cover}
 :root:not([data-theme="light"]) #mega{background:rgba(52,47,43,.86)}}
 :root[data-theme="dark"] #catalog.pbg{background:linear-gradient(rgba(40,37,34,.62),rgba(40,37,34,.78)),var(--p6) center/cover}
 @media (max-width:1150px){header .search{display:none}
@@ -498,6 +498,14 @@ em.mk::after{content:"";position:absolute;left:-.04em;right:-.06em;bottom:-.16em
 .gdots button{position:relative}.gdots button::after{content:"";position:absolute;inset:-18px -3px}
 .gdots button::before{content:"";position:absolute;inset:-14px -6px}
 
+/* светлый фон из фото магазина: секции сменяют друг друга при прокрутке */
+:root{color-scheme:light}
+.hero{background:linear-gradient(90deg,rgba(38,24,14,.82) 0%,rgba(38,24,14,.55) 48%,rgba(38,24,14,.12) 100%),var(--p1) center/cover}
+#catalog.pbg{background:linear-gradient(rgba(251,248,244,.74),rgba(251,248,244,.84)),var(--p6) center/cover}
+.band{background:linear-gradient(rgba(251,248,244,.78),rgba(251,248,244,.86)),var(--p3) center/cover;color:var(--ink)}
+.band .lead{color:var(--mute)}
+.contact{background:linear-gradient(rgba(255,252,248,.80),rgba(255,252,248,.88)),var(--p7) center/cover;border-top:4px solid var(--brand)}
+footer{background:linear-gradient(rgba(34,24,16,.80),rgba(34,24,16,.90)),var(--p1) center 30%/cover}
 </style>
 <style id="img-vars">:root{--p1:url(img/p1.jpg);--p2:url(img/p2.jpg);--p3:url(img/p3.jpg);--p4:url(img/p4.jpg);--p5:url(img/p5.jpg);--p6:url(img/p6.jpg);--p7:url(img/p7.jpg);--mos:url(img/mos.jpg)}</style>
 <link rel="preload" as="image" href="img/p1.jpg" fetchpriority="high">
