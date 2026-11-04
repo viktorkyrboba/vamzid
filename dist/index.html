@@ -515,6 +515,17 @@ footer{background:linear-gradient(rgba(34,24,16,.80),rgba(34,24,16,.90)),var(--p
 #catalog .search input{background:#f6f0e5;color:#1d1a17}
 #catalog .lead,#video .lead,#video h2,#catalog h2,#contacts h2{text-shadow:0 1px 12px rgba(20,12,6,.55)}
 footer{border-top:4px solid var(--brand)}
+#cpage{background:linear-gradient(rgba(28,19,12,.56),rgba(28,19,12,.70)),var(--p6) center/cover fixed}
+@media (max-width:860px){#cpage{background-attachment:scroll}}
+#cpbody>h1,#cpbody>h2,#cpbody>p,#cpbody .crumbs,#cpbody .crumbs a,#cpbody .crumbs span,#cpbody .sortbar,#cpbody .sortbar label,#cpbody>p a.back,#cpbody>.lead{color:#fff7ec;text-shadow:0 1px 10px rgba(20,12,6,.6)}
+#cpbody>.sim>h3,#cpbody>.sim>h2,#cpbody>.sim>p,#cpbody>.sim .lead{color:#fff7ec;text-shadow:0 1px 10px rgba(20,12,6,.6)}
+nav.crumbs{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;scrollbar-width:none;padding:0;margin:0 0 12px;gap:8px;font-size:14px;align-items:center}
+nav.crumbs::-webkit-scrollbar{display:none}
+nav.crumbs a{display:inline;flex:none;min-height:0;padding:4px 0;font-size:14px;font-weight:500}
+nav.crumbs a::before,nav.crumbs a::after{display:none}
+nav.crumbs>span{flex:none}
+nav.crumbs{opacity:1;visibility:visible;pointer-events:auto;transform:none;box-shadow:none;left:auto;right:auto;top:auto;border-radius:0;transition:none}
+#cpbody .crumbs a{text-decoration-color:rgba(255,247,236,.5)}
 </style>
 <style id="img-vars">:root{--p1:url(img/p1.jpg);--p2:url(img/p2.jpg);--p3:url(img/p3.jpg);--p4:url(img/p4.jpg);--p5:url(img/p5.jpg);--p6:url(img/p6.jpg);--p7:url(img/p7.jpg);--mos:url(img/mos.jpg)}</style>
 <link rel="preload" as="image" href="img/p1.jpg" fetchpriority="high">
